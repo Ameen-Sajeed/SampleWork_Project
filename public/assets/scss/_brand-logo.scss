@@ -1,0 +1,31 @@
+/*-------- 10. Brand logo style ---------*/
+
+.brand-logo-active {
+    border: 1px solid #e1e1e1;
+    padding: 48px 10px;
+    .swiper-wrapper {
+        align-items: center;
+        .single-brand-logo {
+            display: flex;
+            justify-content: center;
+            a {
+                display: block;
+                img {
+                    max-width: 100%;
+                    transform: scale(1);
+                    transition: all .4s ease 0s;
+                }
+            }
+            &:hover {
+                a {
+                    img {
+                        transform: scale(.8);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+

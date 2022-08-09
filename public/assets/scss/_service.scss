@@ -1,0 +1,129 @@
+/*-------- 07. Service style ---------*/
+
+.service-wrap {
+	display: flex;
+	align-items: center;
+    .service-img {
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        line-height: 80px;
+        background-color: #f2f2f2;
+        border-radius: 100%;
+        margin-right: 12px;
+        transition: all .3s ease 0s;
+        @media #{$sm-layout} {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+        }
+        img {
+            max-width: 100%;
+            transition: all .3s ease 0s;
+        }
+    }
+    .service-img-3 {
+        margin-right: 20px;
+        @media #{$sm-layout} {
+            margin-right: 10px;
+        }
+        img {
+            max-width: 100%;
+            transition: all .3s ease 0s;
+        }
+    }
+    .service-content {
+        h3 {
+            font-size: 18px;
+            margin: 0 0 4px;
+            font-family: $poppins;
+            @media #{$lg-layout} {
+                font-size: 16px;
+            }
+        }
+        p {
+            color: #6a6a6a;
+            margin: 0;
+        }
+    }
+    &.service-padding {
+        padding: 25px 10px 25px 20px;
+    }
+    &:hover {
+        .service-img {
+            background-color: $theme-color;
+            img {
+                transform: scale(.8);
+            }
+        }
+        .service-img-3 {
+            img {
+                animation: 500ms ease-in-out 0s normal none 1 running tada;
+            }
+        }
+    }
+}
+
+.service-wrap-2 {
+    .service-img-2 {
+        img {
+            max-width: 100%;
+            transition: all .3s ease 0s;
+        }
+    }
+    .service-content-2 {
+        h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 20px 0 34px;
+            position: relative;
+            @media #{$md-layout} {
+                margin: 15px 0 34px;
+            }
+            &:before {
+                position: absolute;
+                content: "";
+                height: 2px;
+                width: 50px;
+                background-color: #e4e4e4;
+                left: 0;
+                right: 0;
+                bottom: -20px;
+                margin: auto;
+            }
+        }
+        p {
+            font-size: 16px;
+            color: #444444;
+            font-weight: 300;
+            line-height: 28px;
+            margin: 0;
+        }
+    }
+    &:hover {
+        .service-img-2 {
+            img {
+                animation: 500ms ease-in-out 0s normal none 1 running tada;
+            }
+        }
+    }
+}
+.service-bg-color-1 {
+    background-color: #ece6f2;
+}
+.service-bg-color-2 {
+    background-color: #e6f2f2;
+}
+.service-bg-color-3 {
+    background-color: #f2f2e6;
+}
+.service-bg-color-4 {
+    background-color: #ffe5e5;
+}
+
+
+
+
+
+
+

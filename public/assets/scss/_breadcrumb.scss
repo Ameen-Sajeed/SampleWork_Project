@@ -1,0 +1,146 @@
+/*-------- 15. Breadcrumb style ---------*/
+
+.breadcrumb-area {
+    position: relative;
+    overflow: hidden;
+    .breadcrumb-img-1 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        img {
+            max-width: 100%;
+            @media #{$xx-layout} {
+                max-width: 280px;
+            }
+            @media #{$xl-layout} {
+                max-width: 280px;
+            }
+            @media #{$lg-layout} {
+                max-width: 230px;
+            }
+            @media #{$md-layout} {
+                max-width: 180px;
+            }
+            @media #{$xs-layout} {
+                max-width: 80px;
+            }
+            @media #{$sm-layout} {
+                max-width: 100px;
+            }
+        }
+    }
+    .breadcrumb-img-2 {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        img {
+            max-width: 100%;
+            @media #{$xx-layout} {
+                max-width: 280px;
+            }
+            @media #{$xl-layout} {
+                max-width: 280px;
+            }
+            @media #{$lg-layout} {
+                max-width: 230px;
+            }
+            @media #{$md-layout} {
+                max-width: 180px;
+            }
+            @media #{$xs-layout} {
+                max-width: 80px;
+            }
+            @media #{$sm-layout} {
+                max-width: 100px;
+            }
+        }
+    }
+    &:before {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        bottom: -25px;
+        margin: 0 auto;
+        width: 342px;
+        height: 342px;
+        border-radius: 100%;
+        background-color: $white;
+        @media #{$lg-layout} {
+            width: 280px;
+            height: 280px;
+        }
+        @media #{$md-layout} {
+            width: 220px;
+            height: 220px;
+        }
+        @media #{$xs-layout} {
+            width: 180px;
+            height: 180px;
+        }
+    }
+}
+.breadcrumb-content {
+    position: relative;
+    h2 {
+        font-size: 48px;
+        font-weight: 500;
+        color: #323232;
+        line-height: 1;
+        margin: 0 0 29px;
+        @media #{$xl-layout} {
+            font-size: 40px;
+            margin: 0 0 20px;
+        }
+        @media #{$lg-layout} {
+            font-size: 40px;
+            margin: 0 0 15px;
+        }
+        @media #{$md-layout} {
+            font-size: 30px;
+            margin: 0 0 15px;
+        }
+        @media #{$xs-layout} {
+            font-size: 25px;
+            margin: 0 0 10px;
+        }
+    }
+    ul {
+        display: flex;
+        justify-content: center;
+        li {
+            margin-right: 7px;
+            color: #686868;
+            &:last-child {
+                margin-right: 0;
+            }
+            a {
+                font-weight: 500;
+                font-size: 13px;
+                display: inline-block;
+            }
+            i {
+                font-size: 13px;
+                line-height: 1;
+                position: relative;
+                top: 2px;
+                color: $black;
+            }
+        }
+    }
+}
+.breadcrumb-padding-1 {
+	padding: 151px 0 152px;
+    @media #{$lg-layout} {
+        padding: 101px 0 102px;
+    }
+    @media #{$md-layout} {
+        padding: 81px 0 82px;
+    }
+    @media #{$xs-layout} {
+        padding: 61px 0 62px;
+    }
+}
+
+
+
