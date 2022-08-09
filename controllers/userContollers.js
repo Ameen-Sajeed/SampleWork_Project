@@ -19,7 +19,7 @@ const postLogin=(req,res)=>{
             req.session.Loggedln=true;
             req.session.user=response.user
          
-            res.redirect('/')
+            res.redirect('/homepage')
         } else {
             req.session.loginErr=true;
             res.send('error')
@@ -27,7 +27,11 @@ const postLogin=(req,res)=>{
     })
 
 }
+// get homepage
 
+const getHomePage=(req,res)=>{
+    res.render('HomePage')
+}
 
 
 // User Login and Register
@@ -56,4 +60,4 @@ const postSignup=(req,res,next)=>{
  
 }
 
-module.exports={getLogin,getLoginRegister,postSignup,postLogin}
+module.exports={getLogin,getLoginRegister,postSignup,postLogin,getHomePage}
