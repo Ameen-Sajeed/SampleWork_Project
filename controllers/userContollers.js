@@ -18,11 +18,11 @@ const postLogin=(req,res)=>{
         if(response.status){
             req.session.Loggedln=true;
             req.session.user=response.user
-
-            res.send('login success')
+         
+            res.redirect('/')
         } else {
             req.session.loginErr=true;
-            res.send('login failed')
+            res.send('error')
         }
     })
 
@@ -42,6 +42,8 @@ const postSignup=(req,res,next)=>{
 
     userhelper.doSignup(req.body).then((response)=>{
         if(response.status){
+         response.user.status=true
+
             console.log(req.body)
 
             res.redirect('/login-register')

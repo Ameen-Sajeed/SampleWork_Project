@@ -19,6 +19,8 @@
         <link href="admin/assets/css/icons.css" rel="stylesheet">
         <link href="admin/assets/css/menu.css" rel="stylesheet" type="text/css">
         <link href="admin/assets/css/style.css" rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/dd7cba467d.js" crossorigin="anonymous"></script>
     </head>
 
     <body class="sticky-header">
@@ -211,13 +213,15 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><i class="fa fa-envelope-o pull-right"></i>Email : <a href="#">{{this.email}}</a></li>
                                     <li class="list-group-item"><i class="fa fa-phone pull-right"></i>Phone : {{this.user-phone}}</li>
+                                   <li class="list-group-item"><i class="fa fa-user pull-right"></i>Status : {{this.state}}</li>
+
                                 </ul>
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-info btn-block mt-0 tooltips text-white " data-placement="top" data-toggle="tooltip" data-original-title="Edit">
-                                        <i class="fa fa-pencil"></i>
+                                    <a href="/admin-users/{{this._id}}" class="btn btn-danger btn-block mt-0 tooltips text-white  " data-placement="top" data-toggle="tooltip" data-original-title="BLOCK">
+                                    <p class="block">BLOCK</p>
                                     </a>
-                                    <a href="#" class="btn btn-dark btn-block mt-0 tooltips text-white " data-placement="top" data-toggle="tooltip" data-original-title="Delete">
-                                      <i class="fa-solid fa-ban"></i>
+                                    <a href="/admin-users/{{this._id}}" class="btn btn-info btn-block mt-0 tooltips text-white " data-placement="top" data-toggle="tooltip" data-original-title="UNBLOCK">
+                                      <p class="unblock">UNBLOCK</p>
                                     </a>
                                 </div>
                                 
@@ -234,7 +238,8 @@
         </section>
 
         <!-- jQuery -->
-        <script src="https://kit.fontawesome.com/dd7cba467d.js" crossorigin="anonymous"></script>
+        
+        
         <script src="admin/assets/js/jquery-3.2.1.min.js"></script>
         <script src="admin/assets/js/popper.min.js"></script>
         <script src="admin/assets/js/bootstrap.min.js"></script>

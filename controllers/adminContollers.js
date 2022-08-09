@@ -1,13 +1,27 @@
 const adminhelper = require("../helpers/adminhelper")
+const multer= require('multer')
 
 
 
+// for uploading  multiple images
+
+const fileStorageEngine = multer.diskStorage({
+    destination: (req,file,cb)=>{
+        cb(null,'./public/admin/images')
+    },
+    filename:(req,file,cb)=>{
+        console.log(file);
+        cb(null,Date.now() + file.originalname)
+    }
+})
+
+const upload = multer({ storage:fileStorageEngine})
 
 const admin ={
     myEmail: "ameen@gmail.com",
     myPassword:123
 }
-
+// get Login
 const getLogin = (req, res) => {
    
     if(req.session.admin){
@@ -18,6 +32,8 @@ const getLogin = (req, res) => {
         res.render('adminLogin')
     }
 }
+
+// Post Login
 
 const postLogin = (req, res) => {
     const { email, password } = req.body;
@@ -33,6 +49,8 @@ const postLogin = (req, res) => {
     }
 
 
+    // Get Logout
+
     const getlogout = (req, res) => {
         req.session.destroy(function (err) {
             if (err) {
@@ -45,18 +63,6 @@ const postLogin = (req, res) => {
         })
     }
     
-
-
-
-
-
-
-// // get Login
-
-// const getLogin=(req,res)=>{
-//     res.render('adminLogin')
-// }
-
 
 // get Admindashboard
 
@@ -93,15 +99,18 @@ const getaddproducts=(req,res)=>{
     
 }
 
+// // Post addProducts
 
-const postaddproducts=(req,res)=>{
-    adminhelper.addproduct(req.body).then((data)=>{
-        console.log(data)
-        res.render('addproduct')
-    })
+// const postaddproducts=upload.array('image')(req,res)=>{
+//     adminhelper.addproduct(req.body).then((data)=>{
+//         console.log(data)
+//         res.render('addproduct')
+//     })
 
 
-}
+// }
+
+
 
 const getCategory=(req,res)=>{
     res.render('category')
@@ -115,8 +124,28 @@ const postCategory=(req,res)=>{
 
 
 }
+// block Users
+
+const blockUsers=(req,res)=>{
+    let proId = req.params.id
+    console.log(proId)
+    adminhelper.blockUser(proId).then((data)=>{
+        res.redirect('/admin-users')
+    })
+}
+
+// unblock Users 
+
+const unblockUsers=(req,res)=>{
+    let proId = req.params.id
+    console.log(proId)
+    adminhelper.unblockUser(proId).then((data)=>{
+        res.redirect('/admin-users')
+    })
+}
 
 
 
 
-module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,postaddproducts,getCategory,postCategory} ;
+
+module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers} ;

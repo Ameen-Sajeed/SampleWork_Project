@@ -351,7 +351,7 @@
                 <div class="container-fluid">
                     <div class="page-head">
                         <h4 class="my-2">Add a Product</h4>
-                        <form class="form-horizontal " method="post" action="/admin-addproducts">
+                        <form class="form-horizontal " method="post" action="/admin-addproducts" enctype="multipart/form-data">
                             <fieldset>
                             
                             <!-- Form Name -->
@@ -524,16 +524,16 @@
                             <div class="form-group">
                               <label class="col-md-4 control-label" for="filebutton">main_image</label>
                               <div class="col-md-4">
-                                <input id="filebutton" name="filebutton" class="input-file" type="file">
+                                <input id="filebutton" name="image" class="input-file" type="file">
                               </div>
                             </div>
                             <!-- File Button --> 
-                            <div class="form-group">
+                            {{!-- <div class="form-group">
                               <label class="col-md-4 control-label" for="filebutton">auxiliary_images</label>
                               <div class="col-md-4">
                                 <input id="filebutton" name="filebutton" class="input-file" type="file">
                               </div>
-                            </div>
+                            </div> --}}
                             
                             <!-- Button -->
                             <div class="form-group">
