@@ -56,6 +56,6 @@ router.post('/admin-category',postCategory)
 
 router.get('/admin-users/:id',blockUsers)
 
-router.get('/admin-users/:id',unblockUsers)
+router.get('/admin-user/:id',unblockUsers)
 
 module.exports = router;

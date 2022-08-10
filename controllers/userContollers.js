@@ -16,12 +16,12 @@ const postLogin=(req,res)=>{
 
     userhelper.doLogin(req.body).then((response)=>{
         if(response.status){
-            req.session.Loggedln=true;
-            req.session.user=response.user
+            // req.session.Loggedln=true;
+            // req.session.user=response.user
          
             res.redirect('/homepage')
         } else {
-            req.session.loginErr=true;
+            // req.session.loginErr=true;
             res.send('error')
         }
     })
