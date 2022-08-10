@@ -16,15 +16,31 @@ module.exports={
             })
         },
 
+        // View product
+
+        viewProducts:(product)=>{
+          return new Promise(async(resolve,reject)=>{
+            let product = await db.get().collection(collection.PRODUCTCOLLECTION).find().toArray()
+            resolve(product)
+            console.log(product)
+          })
+        },
+
+
+
         // Add Product
 
         addproduct:(productData)=>{
             return new Promise(async(resolve,reject)=>{
                 let data =await db.get().collection(collection.PRODUCTCOLLECTION).insertOne(productData)
                     resolve(data)
-                    console.log(data)
+                    // console.log(data)
                 })
             },
+
+
+          
+
 
             // Add Category
 
@@ -35,7 +51,19 @@ module.exports={
                         console.log(data)
                     })
                 },
-                  
+                  // View Category
+  
+                  viewCategory:(category)=>{
+                    return new Promise(async(resolve,reject)=>{
+                      let category = await db.get().collection(collection.CATEGORYCOLLECTION).find().toArray()
+                      resolve(category)
+                      console.log(category)
+                    })
+                  },
+
+
+
+
                 // block User
 
                 blockUser:(proId)=>{
@@ -56,8 +84,24 @@ module.exports={
                         resolve(data)
                       })
                     })
-                  }
+                  },
         
+
+
+
+                    // delete Product
+
+            deleteproduct:(delId)=>{
+              return new Promise(async(resolve,reject)=>{
+                  await db.get().collection(collection.PRODUCTCOLLECTION).deleteOne({_id:objectId(delId)}).then((data)=>{
+                     
+                    console.log(data)
+                    resolve(data)
+
+                  })
+                     
+                  })
+              },
 
 
     }

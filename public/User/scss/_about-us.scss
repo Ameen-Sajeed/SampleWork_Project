@@ -1,0 +1,174 @@
+/*-------- 18. About us style ---------*/
+
+.about-img {
+    margin: 0 37px;
+    @media #{$lg-layout} {
+        margin: 0 0px;
+    }
+    @media #{$md-layout} {
+        text-align: center;
+        margin: 30px 0px 0;
+    }
+    @media #{$xs-layout} {
+        text-align: center;
+        margin: 30px 0px 0;
+    }
+    img {
+        width: 100%;
+        transition: all .4s ease 0s;
+        transform: scale(1);
+        @media #{$md-layout} {
+            max-width: 100%;
+            width: inherit;
+        }
+        @media #{$xs-layout} {
+            max-width: 100%;
+            width: inherit;
+        }
+    }
+    &:hover {
+        img {
+            transform: scale(.9);
+        }
+    }
+}
+
+.about-content {
+    h2 {
+        font-size: 30px;
+        color: $theme-color;
+        font-family: $greatvibes;
+        margin: 0;
+    }
+    h1 {
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 1;
+        margin: 12px 0 28px;
+        @media #{$xs-layout} {
+            font-size: 32px;
+            margin: 10px 0 18px;
+        }
+    }
+    p {
+        color: #5e5e5e;
+        font-size: 15px;
+        font-weight: 300;
+        margin: 0 0 26px;
+        line-height: 26px;
+        @media #{$xs-layout} {
+            font-size: 14px;
+            margin: 0 0 16px;
+        }
+        &.mrg-inc {
+            margin: 0 0 52px;
+            @media #{$xs-layout} {
+                margin: 0 0 23px;
+            }
+        }
+    }
+}
+
+.single-funfact {
+    .funfact-img {
+        img {
+            max-width: 100%;
+            transition: all .3s ease 0s;
+        }
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 36px;
+        color: #3a3a3a; 
+        margin: 15px 0 5px;
+        line-height: 1;
+    }
+    span {
+        color: #3a3a3a;
+        font-size: 15px;
+        display: inline-block;
+        position: relative;
+        padding: 0 0 10px;
+        &:before {
+            position: absolute;
+            content: "";
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 48px;
+            height: 1px;
+            margin: 0 auto;
+            background-color: $theme-color;
+        }
+    }
+    &:hover {
+        .funfact-img {
+            img {
+                animation: 500ms ease-in-out 0s normal none 1 running tada;
+            }
+        }
+    }
+}
+
+.single-team-wrap {
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 100%;
+    overflow: hidden;
+    transition: all .4s ease 0s;
+    img {
+        width: 100%;
+        transition: all .4s ease 0s;
+    }
+    .team-info-position {
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        height: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .4s ease 0s;
+        .team-info {
+            h3 {
+                font-size: 20px;
+                font-weight: 600;
+                margin: 0 0 10px;
+                line-height: 1;
+                @media #{$md-layout} {
+                    margin: 0 0 7px;
+                }
+                @media #{$sm-layout} {
+                    font-size: 16px;
+                    margin: 0 0 3px;
+                }
+            }
+            span {
+                font-size: 16px;
+                color: #666;
+                @media #{$sm-layout} {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    &:hover {
+        border: 1px solid #eee;
+        img {
+            transform: scale(1.08);
+        }
+        .team-info-position {
+            bottom: 0px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+
+

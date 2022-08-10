@@ -1,5 +1,5 @@
 var express = require('express');
-const {admindashboard,getproducts, getUsers, getLogin, getaddproducts, postLogin,getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers} = require('../controllers/adminContollers');
+const {admindashboard,getproducts, getUsers, getLogin, getaddproducts, postLogin,getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers, deleteProducts} = require('../controllers/adminContollers');
 const adminhelper= require('../helpers/adminhelper')
 var router = express.Router();
 var multer=require('multer')
@@ -9,10 +9,10 @@ var multer=require('multer')
 
 const fileStorageEngine = multer.diskStorage({
     destination: (req,file,cb)=>{
-        cb(null,'./public/assets/admin/images')
+        cb(null,'./public/Admin/images')
     },
     filename:(req,file,cb)=>{
-        console.log(file);
+        // console.log(file);
         cb(null,Date.now() + file.originalname)
     }
 })
@@ -42,11 +42,12 @@ router.post('/admin-addproducts',upload.array('image'),(req,res)=>{
     })
 
 var filename = req.files.map(function(file){
+    // console.log(filename);
     return file.filename;
 });
 
-req.body.image = filename;
-console.log(req.body);
+ req.body.image = filename;
+ console.log(req.body);
 
 })
 
@@ -57,5 +58,7 @@ router.post('/admin-category',postCategory)
 router.get('/admin-users/:id',blockUsers)
 
 router.get('/admin-user/:id',unblockUsers)
+
+router.get('/admin-deleteProduct/:id',deleteProducts)
 
 module.exports = router;

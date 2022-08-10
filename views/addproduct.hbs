@@ -10,15 +10,15 @@
         <title>SYNTRA | Responsive Web App Kit</title>
 
         <!-- Theme icon -->
-        <link rel="shortcut icon" href="/Admin/assets/images/favicon.ico">
+        <link rel="shortcut icon" href="/Admin/images/favicon.ico">
 
         <!-- Theme Css -->
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link href="/Admin/assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/Admin/assets/css/slidebars.min.css" rel="stylesheet">
-        <link href="/Admin/assets/css/icons.css" rel="stylesheet">
-        <link href="/Admin/assets/css/menu.css" rel="stylesheet" type="text/css">
-        <link href="/Admin/assets/css/style.css" rel="stylesheet">
+        <link href="/Admin/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/Admin/css/slidebars.min.css" rel="stylesheet">
+        <link href="/Admin/css/icons.css" rel="stylesheet">
+        <link href="/Admin/css/menu.css" rel="stylesheet" type="text/css">
+        <link href="/Admin/css/style.css" rel="stylesheet">
     </head>
 
     <body class="sticky-header">
@@ -28,11 +28,11 @@
                 <div class="sidebar-left-info">
 
                     <div class="user-box">
-                        <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center">
                             <img src="/Admin/assets/images/users/WhatsApp Image 2022-07-30 at 10.23.13 AM.jpeg" alt="" class="img-fluid rounded-circle"> 
                         </div>
                         <div class="text-center text-white mt-2">
-                            <h6>Amien Sajeed</h6>
+                            <h6>Amien  Sajeed</h6>
                             <p class="text-muted m-0">Admin</p>
                         </div>
                     </div>   
@@ -42,10 +42,10 @@
                         <li>
                             <!-- <h3 class="navigation-title">Navigation</h3> -->
                         </li>
-                        <li>
-                            <a href="index.html"><i class="mdi mdi-gauge"></i> <span>Dashboard</span></a>
+                        <li class="active">
+                            <a href="/admindashboard"><i class="mdi mdi-gauge"></i> <span>Dashboard</span></a>
                         </li>
-                        <li class="menu-list"><a href=""><i class="mdi mdi-buffer"></i> <span>Users </span></a>
+                        <li class="menu-lists"><a href=""><i class="mdi mdi-buffer"></i> <span>Sales Report</span></a>
                             <!-- <ul class="child-list">
                                 <li><a href="ui-typography.html"> Typography</a></li>
                                 <li><a href="ui-buttons.html"> Buttons</a></li>
@@ -61,26 +61,20 @@
                         <li>
                             <!-- <h3 class="navigation-title">Components</h3> -->
                         </li>
-                        <li class="menu-list nav-active active"><a href=""><i class="mdi mdi-google-circles-extended"></i> <span>Products <span
+                        <li class="menu-lists"><a href="/admin-users"><i class="fa fa-user-circle"></i> <span>Users <span
                                 class="badge badge-primary noti-arrow pull-right"></span> </span></a>
+                              {{!-- <ul class="child-list">
+                                <li><a href="/admin-users"> View Users </a></li>
+                               
+                            </ul> --}}
+                        </li>
+                        <li class="menu-list"><a href="/admin/admin-products"><i class="mdi mdi-diamond"></i> <span>Products</span></a>
                             <ul class="child-list">
-                                <li class="nav-active active"><a href="components-grid.html"> Add a Product</a></li>
-                                <li><a href="components-calendar.html"> Category Management</a></li>
-                                <!-- <li><a href="components-sweet-alerts.html"> Sweet Alerts </a></li>
-                                <li><a href="components-portlets.html"> Portlets </a></li>
-                                <li><a href="components-widgets.html"> Widgets </a></li>
-                                <li><a href="components-nestable.html"> Nestable </a></li>
-                                <li><a href="components-range-slider.html"> Range Slider </a></li> -->
+                                <li><a href="/admin-addproducts"> Add a Product </a></li>
+                                 <li><a href="/admin-products"> View Products</a></li>
                             </ul>
                         </li>
-                        <li class="menu-list"><a href=""><i class="mdi mdi-diamond"></i> <span>Orders </span></a>
-                            <!-- <ul class="child-list">
-                                <li><a href="icons-material.html"> Material Design</a></li>
-                                <li><a href="icons-font-awesome.html"> Font Awesome</a></li>
-                                <li><a href="icons-themify.html"> Themify</a></li>
-                            </ul> -->
-                        </li>
-                        <li class="menu-list"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Coupons </span></a>
+                        <li class="menu-lists"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Orders </span></a>
                             <!-- <ul class="child-list">
                                 <li><a href="tables-basic.html"> Basic Table</a></li>
                                 <li><a href="tables-datatable.html"> Data Table</a></li>
@@ -88,8 +82,8 @@
                                 <li><a href="tables-responsive.html"> Responsive Table </a></li>
                             </ul> -->
                         </li>
-                        <!-- <li class="menu-list"><a href=""><i class="mdi mdi-google-earth"></i> <span>Forms</span></a>
-                            <ul class="child-list">
+                        <li class="menu-lists"><a href=""><i class="mdi mdi-google-earth"></i> <span> Offers & Coupons </span></a>
+                            <!-- <ul class="child-list">
                                 <li><a href="form-elements.html">General Elements</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
                                 <li><a href="form-advanced.html">Advanced Form</a></li>
@@ -99,52 +93,24 @@
                                 <li><a href="form-imagecrop.html">Image Crop</a></li>
                                 <li><a href="form-xeditable.html">X-Editable</a></li>
                                 <li><a href="form-summernote.html">Summernote</a></li>
-                            </ul>
-                        </li> -->
-                        <!-- <li class="menu-list"><a href=""><i class="mdi mdi-chart-arc"></i> <span>Charts </span></a>
-                            <ul class="child-list">
-                                <li><a href="chart-morris.html">Morris Chart</a></li>
-                                <li><a href="chart-chartjs.html">Chartjs</a></li>
-                                <li><a href="chart-flot.html">Flot Chart</a></li>
-                                <li><a href="chart-peity.html">Peity Chart</a></li>
-                                <li><a href="chart-knob.html">Knob Chart</a></li>
-                            </ul>
+                            </ul> -->
                         </li>
-                        <li class="menu-list"><a href=""><i class="mdi mdi-email" aria-hidden="true"></i><span>Mail </span></a>
-                            <ul class="child-list">
+                        <li class="menu-list"><a href=""><i class="mdi mdi-chart-arc"></i> <span> Category</span></a>
+                             <ul class="child-list">
+                                <li><a href="/admin-category">Category Management</a></li>
+                                 <li><a href="chart-chartjs.html">View Category </a></li>
+                                {{!-- <li><a href="chart-flot.html">Flot Chart</a></li>
+                                <li><a href="chart-peity.html">Peity Chart</a></li>
+                                <li><a href="chart-knob.html">Knob Chart</a></li> --}}
+                            </ul>
+                        </li>  
+                         <li class="menu-lists"><a href="/admin-login"><i class="mdi mdi-email" aria-hidden="true"></i><span>Log Out </span></a>
+                             {{!-- <ul class="child-list">
                                 <li><a href="email-inbox.html">Inbox</a></li>
                                 <li><a href="email-compose.html">Compose mail</a></li>
                                 <li><a href="email-read.html">View Mail</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-list"><a href=""><i class="mdi mdi-newspaper" aria-hidden="true"></i><span>Email Templates</span></a>
-                            <ul class="child-list">
-                                <li><a href="email-template-alert.html">Alert</a></li>
-                                <li><a href="email-template-action.html">Action</a></li>
-                                <li><a href="email-template-billing.html">Billing</a></li>    
-                            </ul>
-                        </li>
-                        <li class="menu-list"><a href=""><i class="mdi mdi-map" aria-hidden="true"></i><span>Maps</span></a>
-                            <ul class="child-list">
-                                <li><a href="maps-gmap.html">Google Map</a></li>
-                                <li><a href="maps-vector.html">Vector Map</a></li>                               
-                            </ul>
-                        </li>
-                        <li class="menu-list nav-active active"><a href=""><i class="mdi mdi-book-multiple" aria-hidden="true"></i><span>Pages</span></a>
-                            <ul class="child-list">                                
-                                <li><a href="pages-profile.html">Profile</a></li>
-                                <li><a href="pages-timeline.html">Timeline</a></li>
-                                <li><a href="pages-invoice.html">Invoice</a></li>
-                                <li><a href="pages-contact.html">Contact-list</a></li>
-                                <li><a href="pages-login.html">Login</a></li>
-                                <li><a href="pages-register.html">Register</a></li>
-                                <li><a href="pages-recoverpw.html">Recover Password</a></li>
-                                <li><a href="pages-lock-screen.html">Lock Screen</a></li>
-                                <li class="active"><a href="pages-blank.html">Blank Page</a></li>
-                                <li><a href="pages-404.html">404 Error</a></li>
-                                <li><a href="pages-500.html">500 Error</a></li>
-                            </ul>
-                        </li> -->
+                            </ul>  --}}
+                        </li> 
                     </ul><!--sidebar nav end-->
                 </div>
             </div><!-- sidebar left end-->
@@ -361,7 +327,7 @@
                             <div class="form-group">
                               <label class="col-md-4 control-label"  name="product" for="product_id" >PRODUCT ID</label>  
                               <div class="col-md-4">
-                              <input id="product_id" name="product" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text" >
+                              <input id="product_id" name="index" placeholder="PRODUCT ID" class="form-control input-md" required="" type="text" >
                                 
                               </div>
                             </div>
@@ -370,155 +336,55 @@
                             <div class="form-group">
                               <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>  
                               <div class="col-md-4">
-                              <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
+                              <input id="product_name" name="name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
                                 
                               </div>
                             </div>
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="product_name_fr">PRODUCT DESCRIPTION FR</label>  
-                              <div class="col-md-4">
-                              <input id="product_name_fr" name="product_name_fr" placeholder="PRODUCT DESCRIPTION FR" class="form-control input-md" required="" type="text">
-                                
-                              </div>
-                            </div> -->
+                    
                             
                             <!-- Select Basic -->
                             <div class="form-group">
                               <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
                               <div class="col-md-4">
-                                <select id="product_categorie" name="product_categorie" class="form-control">
-                                    <option value="Vegetabels">Vegetabels</option>
-                                    <option value="Fruits">Fruits</option>
+                                <select id="product_categorie" name="category" class="form-control">
+                                  {{#each category}}  
+                                    <option value="Vegetables">{{this.name}}</option>
+                                    {{!-- <option value="Fruits">Fruits</option>
                                     <option value="Diary-Products">Diary-Products</option>
                                     <option value="Poultry&fish">Poultry&Fish</option>    
-                                    <option value="Organic Products">Organic Products</option>    
-
+                                    <option value="Organic Products">Organic Products</option>     --}}
+                                 {{/each}}
                                 </select>
                               </div>
                             </div>
                             
                             <!-- Text input-->
                             <div class="form-group">
-                              <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>  
+                              <label class="col-md-4 control-label" for="available_quantity">INVENTORY</label>  
                               <div class="col-md-4">
-                              <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text">
+                              <input id="available_quantity" name="inventory" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="number">
                                 
                               </div>
                             </div>
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="product_weight">PRODUCT WEIGHT</label>  
-                              <div class="col-md-4">
-                              <input id="product_weight" name="product_weight" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text">
-                                
-                              </div>
-                            </div> -->
                             
                             <!-- Textarea -->
                             <div class="form-group">
                               <label class="col-md-4 control-label" for="product_description">PRODUCT DESCRIPTION</label>
                               <div class="col-md-4">                     
-                                <textarea class="form-control" id="product_description" name="product_description"></textarea>
+                                <textarea class="form-control" id="description" name="description"></textarea>
                               </div>
                             </div>
                             
-                            <!-- Textarea -->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="product_name_fr">PRODUCT DESCRIPTION FR</label>
-                              <div class="col-md-4">                     
-                                <textarea class="form-control" id="product_name_fr" name="product_name_fr"></textarea>
-                              </div>
-                            </div> -->
+
                             
-                            <!-- Text input-->
-                            <div class="form-group">
-                              <label class="col-md-4 control-label" for="percentage_discount">PERCENTAGE DISCOUNT</label>  
+                             <!-- Text input-->
+                             <div class="form-group">
+                              <label class="col-md-4 control-label" for="percentage_discount">PRICE</label>  
                               <div class="col-md-4">
-                              <input id="percentage_discount" name="percentage_discount" placeholder="PERCENTAGE DISCOUNT" class="form-control input-md" required="" type="text">
+                              <input id="percentage_discount" name="price" placeholder="Price of Product" class="form-control input-md" required="" type="number">
                                 
                               </div>
-                            </div>
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="stock_alert">STOCK ALERT</label>  
-                              <div class="col-md-4">
-                              <input id="stock_alert" name="stock_alert" placeholder="STOCK ALERT" class="form-control input-md" required="" type="text">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Search input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="stock_critical">STOCK CRITICAL</label>
-                              <div class="col-md-4">
-                                <input id="stock_critical" name="stock_critical" placeholder="STOCK CRITICAL" class="form-control input-md" required="" type="search">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Search input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="tutorial">TUTORIAL</label>
-                              <div class="col-md-4">
-                                <input id="tutorial" name="tutorial" placeholder="TUTORIAL" class="form-control input-md" required="" type="search">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Search input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="tutorial_fr">TUTORIAL FR</label>
-                              <div class="col-md-4">
-                                <input id="tutorial_fr" name="tutorial_fr" placeholder="TUTORIAL FR" class="form-control input-md" required="" type="search">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="online_date">ONLINE DATE</label>  
-                              <div class="col-md-4">
-                              <input id="online_date" name="online_date" placeholder="ONLINE DATE" class="form-control input-md" required="" type="text">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="author">AUTHOR</label>  
-                              <div class="col-md-4">
-                              <input id="author" name="author" placeholder="AUTHOR" class="form-control input-md" required="" type="text">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="enable_display">ENABLE DISPLAY</label>  
-                              <div class="col-md-4">
-                              <input id="enable_display" name="enable_display" placeholder="ENABLE DISPLAY" class="form-control input-md" required="" type="text">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="comment">COMMENT</label>  
-                              <div class="col-md-4">
-                              <input id="comment" name="comment" placeholder="COMMENT" class="form-control input-md" required="" type="text">
-                                
-                              </div>
-                            </div> -->
-                            
-                            <!-- Text input-->
-                            <!-- <div class="form-group">
-                              <label class="col-md-4 control-label" for="approuved_by">APPROUVED BY</label>  
-                              <div class="col-md-4">
-                              <input id="approuved_by" name="approuved_by" placeholder="APPROUVED BY" class="form-control input-md" required="" type="text"> -->
+                            </div> 
                                 
                              <!-- File Button --> 
                             <div class="form-group">
@@ -843,16 +709,16 @@
         <!-- jQuery -->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="/Admin/assets/js/jquery-3.2.1.min.js"></script>
-        <script src="/Admin/assets/js/popper.min.js"></script>
-        <script src="/Admin/assets/js/bootstrap.min.js"></script>
-        <script src="/Admin/assets/js/jquery-migrate.js"></script>
-        <script src="/Admin/assets/js/modernizr.min.js"></script>
-        <script src="/Admin/assets/js/jquery.slimscroll.min.js"></script>
-        <script src="/Admin/assets/js/slidebars.min.js"></script>
+        <script src="/Admin/js/jquery-3.2.1.min.js"></script>
+        <script src="/Admin/js/popper.min.js"></script>
+        <script src="/Admin/js/bootstrap.min.js"></script>
+        <script src="/Admin/js/jquery-migrate.js"></script>
+        <script src="/Admin/js/modernizr.min.js"></script>
+        <script src="/Admin/js/jquery.slimscroll.min.js"></script>
+        <script src="/Admin/js/slidebars.min.js"></script>
         
 
         <!--app js-->
-        <script src="/Admin/assets/js/jquery.app.js"></script>
+        <script src="/Admin/js/jquery.app.js"></script>
     </body>
 </html>

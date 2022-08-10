@@ -1,21 +1,21 @@
 const adminhelper = require("../helpers/adminhelper")
-const multer= require('multer')
+// const multer= require('multer')
 
 
 
-// for uploading  multiple images
+// // for uploading  multiple images
 
-const fileStorageEngine = multer.diskStorage({
-    destination: (req,file,cb)=>{
-        cb(null,'./public/admin/images')
-    },
-    filename:(req,file,cb)=>{
-        console.log(file);
-        cb(null,Date.now() + file.originalname)
-    }
-})
+// const fileStorageEngine = multer.diskStorage({
+//     destination: (req,file,cb)=>{
+//         cb(null,'./public/admin/images')
+//     },
+//     filename:(req,file,cb)=>{
+//         console.log(file);
+//         cb(null,Date.now() + file.originalname)
+//     }
+// })
 
-const upload = multer({ storage:fileStorageEngine})
+// const upload = multer({ storage:fileStorageEngine})
 
 const admin ={
     myEmail: "ameen@gmail.com",
@@ -75,8 +75,13 @@ const admindashboard=(req,res)=>{
 // //get Products
 
 const getproducts=(req,res)=>{
-    res.render('product')
+    adminhelper.viewProducts().then((product)=>{
+        // console.log(product)
+        res.render('product',{product})
+    })
 }
+
+
 
 // get Users 
 
@@ -91,10 +96,10 @@ const getUsers=(req,res)=>{
 // get addproduct
 
 const getaddproducts=(req,res)=>{
-    //  adminhelper.addproduct(req.body).then((data)=>{
-    //     console.log(data)
-        res.render('addproduct')
-    //  })
+   
+adminhelper.viewCategory().then((category)=>{
+    res.render('addproduct',{category:category})
+})
 
     
 }
@@ -144,8 +149,16 @@ const unblockUsers=(req,res)=>{
     })
 }
 
+const deleteProducts=(req,res)=>{
+
+    let delId= req.params.id
+    adminhelper.deleteproduct(delId).then((data)=>{
+        res.redirect('/admin-products')
+    })
+
+}
 
 
 
 
-module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers} ;
+module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers,deleteProducts} ;
