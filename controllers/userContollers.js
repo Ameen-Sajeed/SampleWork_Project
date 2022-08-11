@@ -3,11 +3,28 @@ const { MongoClient } = require("mongodb")
 const userhelper = require("../helpers/userhelper")
 const { doSignup } = require("../helpers/userhelper")
 
-// get login
+
+
+
+// const verifyLogin=(req,res,next)=>{
+//     if(req.session.loggedIn){
+//         next();
+//     }
+//     else {
+//         res.redirect('/login-register')
+//     }
+// }
+// // get login
 
 
 const getLogin=(req,res)=>{
-    res.send('hai')
+    // if(req.session.loggedIn){
+    //     res.redirect('/')
+    // } else{
+    //     res.render('login-register')
+    // }
+
+    res.render('login-register')
 }
 
 // post login
@@ -22,7 +39,7 @@ const postLogin=(req,res)=>{
             res.redirect('/homepage')
         } else {
             req.session.loginErr=true;
-            res.send('You are Temporarily Blocked By Admin ')
+            res.redirect('/login-register')
         }
     })
 

@@ -118,16 +118,24 @@ adminhelper.viewCategory().then((category)=>{
 
 
 const getCategory=(req,res)=>{
-    res.render('category')
+  adminhelper.viewCategory().then((category)=>{
+    res.render('category',{category})
+  })  
+    // res.render('category')
 }
 
 const postCategory=(req,res)=>{
     adminhelper.addcategory(req.body).then((data)=>{
         console.log(data)
-        res.render('category')
+        res.redirect('/admin-category')
     })
 
 
+}
+// view Category
+
+const viewCategory=(req,res)=>{
+    res.render('viewCategory')
 }
 // block Users
 
@@ -158,7 +166,14 @@ const deleteProducts=(req,res)=>{
 
 }
 
+const deletecategorys=(req,res)=>{
+    let catId=req.params.id
+    adminhelper.deletecategory(catId).then((data)=>{
+        res.redirect('/admin-category')
+    })
+}
 
 
 
-module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers,deleteProducts} ;
+
+module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers,deleteProducts,viewCategory,deletecategorys} ;

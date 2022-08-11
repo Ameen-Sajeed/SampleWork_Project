@@ -38,8 +38,33 @@ module.exports={
                 })
             },
 
+           
+                    // delete Product
 
+                    deleteproduct:(delId)=>{
+                      return new Promise(async(resolve,reject)=>{
+                          await db.get().collection(collection.PRODUCTCOLLECTION).deleteOne({_id:objectId(delId)}).then((data)=>{
+                             
+                            console.log(data)
+                            resolve(data)
+        
+                          })
+                             
+                          })
+                      },
           
+              // delete Category
+              deletecategory:(catId)=>{
+                return new Promise(async(resolve,reject)=>{
+                    await db.get().collection(collection.CATEGORYCOLLECTION).deleteOne({_id:objectId(catId)}).then((data)=>{
+                       
+                      console.log(data)
+                      resolve(data)
+  
+                    })
+                       
+                    })
+                },
 
 
             // Add Category
@@ -89,19 +114,6 @@ module.exports={
 
 
 
-                    // delete Product
-
-            deleteproduct:(delId)=>{
-              return new Promise(async(resolve,reject)=>{
-                  await db.get().collection(collection.PRODUCTCOLLECTION).deleteOne({_id:objectId(delId)}).then((data)=>{
-                     
-                    console.log(data)
-                    resolve(data)
-
-                  })
-                     
-                  })
-              },
 
 
     }

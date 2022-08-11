@@ -1,5 +1,5 @@
 var express = require('express');
-const {admindashboard,getproducts, getUsers, getLogin, getaddproducts, postLogin,getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers, deleteProducts} = require('../controllers/adminContollers');
+const {admindashboard,getproducts, getUsers, getLogin, getaddproducts, postLogin,getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers, deleteProducts, viewCategory, deletecategorys} = require('../controllers/adminContollers');
 const adminhelper= require('../helpers/adminhelper')
 var router = express.Router();
 var multer=require('multer')
@@ -34,7 +34,7 @@ router.get('/admin-addproducts',getaddproducts)
 
 // router.post('/admin-addproducts',postaddproducts)
 
-router.post('/admin-addproducts',upload.array('image'),(req,res)=>{
+router.post('/admin-addproducts',upload.array('image',2),(req,res)=>{
     console.log(req.body);
     console.log(req.files);
     adminhelper.addproduct(req.body,(data)=>{
@@ -55,10 +55,14 @@ router.get('/admin-category',getCategory)
 
 router.post('/admin-category',postCategory)
 
+router.get('/admin-viewcategory',viewCategory)
+
 router.get('/admin-users/:id',blockUsers)
 
 router.get('/admin-user/:id',unblockUsers)
 
 router.get('/admin-deleteProduct/:id',deleteProducts)
+
+router.get('/admin-deletecategory/:id',deletecategorys)
 
 module.exports = router;
