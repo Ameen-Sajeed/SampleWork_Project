@@ -65,4 +65,5 @@ router.get('/admin-deleteProduct/:id',deleteProducts)
 
 router.get('/admin-deletecategory/:id',deletecategorys)
 
+
 module.exports = router;

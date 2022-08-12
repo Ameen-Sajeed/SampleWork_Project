@@ -1,4 +1,5 @@
 const adminhelper = require("../helpers/adminhelper")
+const userhelper = require("../helpers/userhelper")
 // const multer= require('multer')
 
 
@@ -132,6 +133,20 @@ const postCategory=(req,res)=>{
 
 
 }
+// getProductDetails
+
+const getproductsDetails=(req,res,next)=>{
+    let proId= req.params.id
+    console.log(proId)
+    userhelper.Viewproductdetail(req.params.id).then((data)=>{
+        res.render('productDetails',data)
+    })
+        
+    }
+   
+
+
+
 // view Category
 
 const viewCategory=(req,res)=>{
@@ -176,4 +191,4 @@ const deletecategorys=(req,res)=>{
 
 
 
-module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers,deleteProducts,viewCategory,deletecategorys} ;
+module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers,deleteProducts,viewCategory,deletecategorys,getproductsDetails} ;

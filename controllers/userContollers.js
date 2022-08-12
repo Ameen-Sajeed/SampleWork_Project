@@ -31,14 +31,13 @@ const getLogin=(req,res)=>{
 
 const postLogin=(req,res)=>{
 
-    userhelper.doLogin(req.body).then((response)=>{
+    userhelper.doLogin(req.body).then((response)=>{ 
         if(response.status){
             req.session.Loggedln=true;
-            // req.session.user=response.user
-         
-            res.redirect('/homepage')
+            req.session.user=response.user
+            res.redirect('/')
         } else {
-            req.session.loginErr=true;
+            // req.session.loginErr=true;
             res.redirect('/login-register')
         }
     })
@@ -76,5 +75,10 @@ const postSignup=(req,res,next)=>{
     })
  
 }
+// User otp
 
-module.exports={getLogin,getLoginRegister,postSignup,postLogin,getHomePage}
+const getotp=(req,res)=>{
+    res.render('otp')
+}
+
+module.exports={getLogin,getLoginRegister,postSignup,postLogin,getHomePage,getotp}
