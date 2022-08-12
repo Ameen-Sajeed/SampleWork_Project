@@ -38,7 +38,7 @@ const postLogin=(req,res)=>{
             res.redirect('/')
         } else {
             // req.session.loginErr=true;
-            res.redirect('/login-register')
+            res.render('login-register')
         }
     })
 

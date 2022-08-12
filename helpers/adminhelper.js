@@ -52,7 +52,32 @@ module.exports={
                              
                           })
                       },
+                      // update Product
+                      updateProduct:(Id,product)=>{
+                        console.log(Id);
+                        return new Promise (async(resolve,reject)=>{
+                         await db.get().collection(collection.PRODUCTCOLLECTION).updateOne({_id:objectId(Id)},{$set:{
+                          name:product.name,
+                          index:product.index,
+                          price:product.price,
+                          inventory:product.inventory,
+                          description:product.description
+                         }}).then((data)=>{
+                          console.log(data);
+                          resolve(data)
+                         })
+                        })
+                      },
           
+
+                      // getUpdateProduct
+                      ViewUpdateproduct:(Id)=>{
+                        return new Promise(async(resolve,reject)=>{
+                        let data = await db.get().collection(collection.PRODUCTCOLLECTION).findOne({_id:objectId(Id)})
+                        resolve(data)
+                        })
+                      },
+
               // delete Category
               deletecategory:(catId)=>{
                 return new Promise(async(resolve,reject)=>{

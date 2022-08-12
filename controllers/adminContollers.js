@@ -188,7 +188,31 @@ const deletecategorys=(req,res)=>{
     })
 }
 
+// update Product
+
+const getupdateproduct=(req,res)=>{
+    // adminhelper.viewCategory().then((category)=>{
+    //     res.render('updateproduct',{category:category})
+    // })
+    let Id=req.params.id
+    adminhelper.ViewUpdateproduct(Id).then((data)=>{
+        console.log(data)
+        res.render('updateproduct',{data})
+    })
+}
+
+const postupdateproduct=(req,res)=>{
+    let Id = req.params.id
+    console.log(Id);
+    adminhelper.updateProduct(Id,req.body).then((data)=>{
+        // console.log(data)
+        res.redirect('/admin-products')
+    })
+}
 
 
 
-module.exports =  {admindashboard,getproducts,getUsers,getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,blockUsers,unblockUsers,deleteProducts,viewCategory,deletecategorys,getproductsDetails} ;
+module.exports =  {admindashboard,getproducts,getUsers,
+    getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,
+    blockUsers,unblockUsers,deleteProducts,viewCategory,deletecategorys,
+    getproductsDetails,getupdateproduct,postupdateproduct} ;

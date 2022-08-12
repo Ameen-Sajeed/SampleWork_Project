@@ -128,8 +128,8 @@
                 <div class="logo bg-dark">
                     <a href="index.html">
                         <span class="logo-img">
-                            <img src="/Admin/images/c8192ec97097433bac582406af5cb088__1_-removebg-preview.png"
-                                alt="" height="76">
+                            <img src="/Admin/images/c8192ec97097433bac582406af5cb088__1_-removebg-preview.png" alt=""
+                                height="76">
                         </span>
                         <!--<i class="fa fa-maxcdn"></i>-->
                         <span class="brand-name">Harvest </span>
@@ -365,15 +365,17 @@
                                             <tbody>
                                                 <tr>
                                                     <td>{{@index}}</td>
-                                                    <td><img style="width:110px;height:130px" src="/Admin/images/{{this.image.[0]}}" alt="pic"></td>
+                                                    <td><img style="width:110px;height:130px"
+                                                            src="/Admin/images/{{this.image.[0]}}" alt="pic"></td>
                                                     <td>{{this.name}}</td>
                                                     <td>{{this.category}}</td>
                                                     <td>{{this.inventory}}</td>
                                                     <td>{{this.price}}</td>
                                                     <td>{{this.description}}</td>
                                                     <td>
-                                                        <a href="/admin-deleteProduct/{{this._id}}" class="btn btn-danger">Delete</a>
-                                                        <a href="" class="btn btn-info">Edit</a>
+                                                        <a href="/admin-deleteProduct/{{this._id}}"
+                                                            class="btn btn-danger">Delete</a>
+                                                        <a href="/admin-updateproducts/{{this._id}}" class="btn btn-info">Edit</a>
                                                     </td>
                                                 </tr>
 
@@ -406,7 +408,8 @@
 
     <!--app js-->
     <script src="/Admin/js/jquery.app.js"></script>
-    {{!-- <script type="text/javascript">
+    {{!--
+    <script type="text/javascript">
         $('#my-table').Tabledit({
             columns: {
                 identifier: [0, 'id'],

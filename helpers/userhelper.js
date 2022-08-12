@@ -3,7 +3,7 @@ var collection = require('../config/collection')
 var bcrypt = require('bcrypt')
 var objectId=require('mongodb').ObjectId
 
- const client = require('twilio')('AC9bf3b681920a0d9970eaa94755ecd1f6','55dae365e6c6120c5d66a38d3c44d842');
+//  const client = require('twilio')('AC9bf3b681920a0d9970eaa94755ecd1f6','55dae365e6c6120c5d66a38d3c44d842');
 
 
 module.exports = {
@@ -14,10 +14,10 @@ module.exports = {
         let response = {}
         return new Promise(async (resolve, reject) => {
             let email = await db.get().collection(collection.USERCOLLECTION).findOne({ email: userData.email })
-            let phone = await db.get().collection(collection.USERCOLLECTION).findOne({ phone: userData.phone })
+            // let phone = await db.get().collection(collection.USERCOLLECTION).findOne({ phone: userData.phone })
 
 
-            if (email && phone) {
+            if (email) {
                 response.status = true;
                 console.log(response);
                 resolve(response)
@@ -26,10 +26,10 @@ module.exports = {
          
              else {
 
-                client.verify.v2.services('VA25af488541672fc2173213a8934435b5')
-                .verifications
-                .create({to: '+15017122661', channel: 'sms'})
-                .then(verification => console.log(verification.status));
+                // client.verify.v2.services('VA25af488541672fc2173213a8934435b5')
+                // .verifications
+                // .create({to: '+15017122661', channel: 'sms'})
+                // .then(verification => console.log(verification.status));
 
 
                 userData.state = true;
