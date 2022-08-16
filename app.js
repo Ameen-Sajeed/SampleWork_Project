@@ -1,23 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 const session = require('express-session')
-var hbs=require('express-handlebars')
+const hbs = require('express-handlebars')
 const flash = require('connect-flash')
-
 const { v4: uuidv4 } = require("uuid")
+const logger = require('morgan');
+const usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
+const app = express();
+const db = require('./config/connection')
 
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var adminRouter = require('./routes/admin');
-
-var app = express();
-var db=require('./config/connection')
-
-// view engine setup
+/* -------------------------------------------------------------------------- */
+/*                              view engine setup                             */
+/* -------------------------------------------------------------------------- */
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -26,13 +23,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/User')));
-app.use(express.static(path.join(__dirname, 'public/User/css')));
-app.use(express.static(path.join(__dirname, 'public/User/js')));
+app.use('/', usersRouter);
+app.use('/', adminRouter);
 
 
-
-app.use(flash());
+/* -------------------------------------------------------------------------- */
+/*                           Browser cache clearing                           */
+/* -------------------------------------------------------------------------- */
 
 app.use((req, res, next) => {
   if (!req.admin) {
@@ -41,6 +38,10 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+/* -------------------------------------------------------------------------- */
+/*                              Session Creation                              */
+/* -------------------------------------------------------------------------- */
 
 const maxAge = 24 * 60 * 60 * 1000;
 app.use(
@@ -52,38 +53,45 @@ app.use(
   })
 );
 
+/* -------------------------------------------------------------------------- */
+/*                              Mongodb creation                              */
+/* -------------------------------------------------------------------------- */
 
+db.connect((err) => {
+  if (err) {
 
-db.connect((err)=>{
-  if(err){
-
-   console.log('connection erorr'+err)
+    console.log('connection erorr' + err)
   }
-  else{
+  else {
 
-   console.log("database connected")
+    console.log("database connected")
   }
 });
 
-app.use('/', indexRouter);
-app.use('/', usersRouter);
-app.use('/', adminRouter);
 
+/* -------------------------------------------------------------------------- */
+/*                   catch 404 and forward to error handler                   */
+/* -------------------------------------------------------------------------- */
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
+/* -------------------------------------------------------------------------- */
+/*                                error handler                               */
+/* -------------------------------------------------------------------------- */
+
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  /* -------------------------------------------------------------------------- */
+  /*                            render the error page                           */
+  /* -------------------------------------------------------------------------- */
+
   res.status(err.status || 500);
-  res.render('error');
+  res.render('404page');
 });
 
 module.exports = app;

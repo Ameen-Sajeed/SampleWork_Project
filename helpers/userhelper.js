@@ -32,7 +32,7 @@ module.exports = {
                 // .then(verification => console.log(verification.status));
 
 
-                userData.state = true;
+                userData.state = "active";
                 userData.password = await bcrypt.hash(userData.password, 10)
                 db.get().collection(collection.USERCOLLECTION).insertOne(userData).then((data) => {
                     resolve(data.insertedId)
@@ -54,8 +54,15 @@ module.exports = {
             let response = {}
             let loginStatus = false
             let user = await db.get().collection(collection.USERCOLLECTION).findOne({ email: userData.email })
-            let check = await db.get().collection(collection.USERCOLLECTION).findOne({ state: true })
-            if (user && check) {
+            // let check = await db.get().collection(collection.USERCOLLECTION).findOne({ state: true })
+
+            if(user.state=="blocked"){
+                resolve({status:false})
+            }
+            else {
+
+            
+            if (user) {
                 console.log(user);
                 bcrypt.compare(userData.Password, user.password).then((status) => {
                     console.log(status);
@@ -76,6 +83,7 @@ module.exports = {
                 response.status = false
                 resolve(response)
             }
+        }
         })
 
 

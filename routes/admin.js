@@ -1,72 +1,76 @@
-var express = require('express');
-const {admindashboard,getproducts, getUsers, getLogin, getaddproducts, postLogin,getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers, deleteProducts, viewCategory, deletecategorys, updateproduct, getupdateproduct, postupdateproduct} = require('../controllers/adminContollers');
-const adminhelper= require('../helpers/adminhelper')
-var router = express.Router();
-var multer=require('multer')
+const express = require('express');
+const { admindashboard, getproducts, getUsers, getLogin, getaddproducts, postLogin, getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers, deleteProducts, viewCategory, deletecategorys, updateproduct, getupdateproduct, postupdateproduct, getBanner, addBanner, postaddBanner } = require('../controllers/adminContollers');
+const adminhelper = require('../helpers/adminhelper')
+const router = express.Router();
+const multer = require('../helpers/multer')
 
 
-// for uploading  multiple images
+/* -------------------------------------------------------------------------- */
+/*                                 admin Login  Routes                       */
+/* -------------------------------------------------------------------------- */
 
-const fileStorageEngine = multer.diskStorage({
-    destination: (req,file,cb)=>{
-        cb(null,'./public/Admin/images')
-    },
-    filename:(req,file,cb)=>{
-        // console.log(file);
-        cb(null,Date.now() + file.originalname)
-    }
-})
-const upload = multer({ storage:fileStorageEngine})
+router.get('/admin-login', getLogin)
 
-router.get('/admin-login',getLogin)
+router.post('/admin-login', postLogin)
 
-router.post('/admin-login',postLogin)
+router.get("/logout", getlogout)
 
-router.get("/logout",getlogout)
+/* -------------------------------------------------------------------------- */
+/*                                 User Routes                                */
+/* -------------------------------------------------------------------------- */
 
-router.get('/admindashboard',admindashboard)
+router.get('/admindashboard', admindashboard)
 
-router.get('/admin-products',getproducts)
+router.get('/admin-users/:id', blockUsers)
 
-router.get('/admin-users',getUsers)
+router.get('/admin-user/:id', unblockUsers)
 
-router.get('/admin-addproducts',getaddproducts)
 
-// router.post('/admin-addproducts',postaddproducts)
+/* -------------------------------------------------------------------------- */
+/*                               Products Routes                              */
+/* -------------------------------------------------------------------------- */
 
-router.post('/admin-addproducts',upload.array('image',4),(req,res)=>{
-    console.log(req.body);
-    console.log(req.files);
-    adminhelper.addproduct(req.body,(data)=>{
-        let image = req.files.image
-    })
+router.get('/admin-products', getproducts)
 
-var filename = req.files.map(function(file){
-    // console.log(filename);
-    return file.filename;
-});
+router.get('/admin-users', getUsers)
 
- req.body.image = filename;
- console.log(req.body);
+router.get('/admin-addproducts', getaddproducts)
 
-})
+router.post('/admin-addproducts', multer.array('image', 4), postaddproducts)
 
-router.get('/admin-category',getCategory)
+router.get('/admin-deleteProduct/:id', deleteProducts)
 
-router.post('/admin-category',postCategory)
+router.get('/admin-updateproducts/:id', getupdateproduct)
 
-router.get('/admin-viewcategory',viewCategory)
+router.post('/admin-updateproducts/:id',multer.array('image',4), postupdateproduct)
 
-router.get('/admin-users/:id',blockUsers)
 
-router.get('/admin-user/:id',unblockUsers)
+/* -------------------------------------------------------------------------- */
+/*                               Category Routes                              */
+/* -------------------------------------------------------------------------- */
 
-router.get('/admin-deleteProduct/:id',deleteProducts)
 
-router.get('/admin-deletecategory/:id',deletecategorys)
+router.get('/admin-category', getCategory)
 
-router.get('/admin-updateproducts/:id',getupdateproduct)
+router.post('/admin-category', postCategory)
 
-router.post('/admin-updateproducts/:id',postupdateproduct)
+router.get('/admin-viewcategory', viewCategory)
+
+router.get('/admin-deletecategory/:id', deletecategorys)
+
+/* -------------------------------------------------------------------------- */
+/*                                Banner Routes                               */
+/* -------------------------------------------------------------------------- */
+
+router.get('/admin-banner',getBanner)
+
+router.get('/admin-addbanner',addBanner)
+
+router.post('/admin-addbanner',multer.array('image'),postaddBanner)
+
 
 module.exports = router;
+
+
+
+
