@@ -1,12 +1,17 @@
-var db = require('../config/connection')
-var collection = require('../config/collection')
-var bcrypt = require('bcrypt')
-var objectId=require('mongodb').ObjectId
-
-//  const client = require('twilio')('AC9bf3b681920a0d9970eaa94755ecd1f6','55dae365e6c6120c5d66a38d3c44d842');
+const db = require('../config/connection')
+const collection = require('../config/collection')
+const bcrypt = require('bcrypt')
+const objectId = require('mongodb').ObjectId
+const otp=require('../config/otp')
+const { serviceID } = require('../config/otp')
+const client= require('twilio')(otp.accountSID,otp.authToken)
 
 
 module.exports = {
+
+    /* -------------------------------------------------------------------------- */
+    /*                                 User SignUp                                */
+    /* -------------------------------------------------------------------------- */
 
     doSignup: (userData) => {
         console.log(userData);
@@ -23,13 +28,8 @@ module.exports = {
                 resolve(response)
 
             }
-         
-             else {
 
-                // client.verify.v2.services('VA25af488541672fc2173213a8934435b5')
-                // .verifications
-                // .create({to: '+15017122661', channel: 'sms'})
-                // .then(verification => console.log(verification.status));
+            else {
 
 
                 userData.state = "active";
@@ -49,81 +49,140 @@ module.exports = {
 
     },
 
+    /* -------------------------------------------------------------------------- */
+    /*                                 User Login                                 */
+    /* -------------------------------------------------------------------------- */
+
     doLogin: (userData) => {
-        return new Promise(async (resolve, reject) => { 
             let response = {}
             let loginStatus = false
-            let user = await db.get().collection(collection.USERCOLLECTION).findOne({ email: userData.email })
-            // let check = await db.get().collection(collection.USERCOLLECTION).findOne({ state: true })
+            userData.state ='active'
+            return new Promise(async (resolve, reject) => {
 
-            if(user.state=="blocked"){
-                resolve({status:false})
-            }
-            else {
+            let user = await db.get().collection(collection.USERCOLLECTION).findOne({$and: [{email: userData.email },{state:userData.state}]})
 
+           
+                if (user) {
+                    console.log(user);
+                    bcrypt.compare(userData.Password, user.password).then((status) => {
+                        console.log(status);
+                        if (status) {
+                            console.log('login-success')
+                            response.user = user;
+                            response.user.status = true
+                            response.status = true;
+                            resolve(response)
+                        }
+                        else {
             
-            if (user) {
-                console.log(user);
-                bcrypt.compare(userData.Password, user.password).then((status) => {
-                    console.log(status);
-                    if(status){
-                     console.log('login-success')
-                     response.user= user;
-                     response.user.status=true   
-                    response.status = true;
-                    resolve(response)
-                    }
-                    else {
-                        resolve({status:false})
-                    }
-                })
+                            resolve({ status: false })
+                        }
+                    })
 
-            }
-            else {
-                response.status = false
-                resolve(response)
-            }
-        }
+                }
+                else {
+                    response.status = false
+                    resolve(response)
+                }
+            
         })
 
 
     },
 
-     // View product
+    /* -------------------------------------------------------------------------- */
+    /*                                View product                                */
+    /* -------------------------------------------------------------------------- */
 
-     viewProducts:(product)=>{
-        return new Promise(async(resolve,reject)=>{
-          let product = await db.get().collection(collection.PRODUCTCOLLECTION).find().toArray()
-          resolve(product)
-          console.log(product)
+    viewProducts: (product) => {
+        return new Promise(async (resolve, reject) => {
+            let product = await db.get().collection(collection.PRODUCTCOLLECTION).find().toArray()
+            resolve(product)
+            console.log(product)
         })
-      },
+    },
 
 
-      // view ProductDetails
+    /* -------------------------------------------------------------------------- */
+    /*                               Product detail                               */
+    /* -------------------------------------------------------------------------- */
 
-       // block User
-
-       Viewproductdetail:(proId)=>{
-        return new Promise(async(resolve,reject)=>{
-          let data=await db.get().collection(collection.PRODUCTCOLLECTION).findOne({_id:objectId(proId)})
+    Viewproductdetail: (proId) => {
+        return new Promise(async (resolve, reject) => {
+            let data = await db.get().collection(collection.PRODUCTCOLLECTION).findOne({ _id: objectId(proId) })
             console.log(data)
             resolve(data)
-        
+
         })
-      },
-  
+    },
+
+/* -------------------------------------------------------------------------- */
+/*                                Generate OTP                                */
+/* -------------------------------------------------------------------------- */
+
+doOTP:(userData) =>{
+    let response={}
+    return new Promise(async(resolve,reject)=>{
+        let user= await db.get().collection(collection.USERCOLLECTION).findOne({ phone: userData.phone })
+    
+        if(user){
+            response.status= true
+            response.user=user
+              client.verify.services(otp.serviceID)
+                .verifications
+                .create({to: `+91${userData.phone}`, channel: 'sms'})
+                .then((verification) =>{
+
+                });   
+                console.log(response);
+                resolve(response)
+
+        }
+        else{
+            response.status=false;
+            resolve(response)
+           
+
+
+        }
+    })
+},
+
+
+/* -------------------------------------------------------------------------- */
+/*                                 Confirm OTP                                */
+/* -------------------------------------------------------------------------- */
+
+doOTPconfirm:(confirmOtp,userData)=>{
+    console.log('hello');
+    console.log(userData);
+    console.log(confirmOtp);
+
+    return new Promise((resolve,reject)=>
+
+    {
+
+        client.verify.services(otp.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${userData.phone}`,
+             code: confirmOtp.phone
+            })
+        .then((data) => {
+            if(data.status == 'approved'){
+                resolve({status:true})
+            }
+            else {
+                resolve({status:false})
+            }
+
+        })
+
+    })
+    
 }
 
 
 
 
-
-// // //
-// // const client = require('twilio')(accountSid, authToken);
-
-//  client.verify.v2.services('VAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-//                 .verifications
-//                 .create({to: '+15017122661', channel: 'sms'})
-//                 .then(verification => console.log(verification.status));
-
+}

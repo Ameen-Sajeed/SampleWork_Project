@@ -1,5 +1,5 @@
 var express = require('express');
-const { getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart, getcheckout} = require('../controllers/userContollers');
+const { getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart, getcheckout, getOtp, confirmOtp, postOtp, getSignUp, postconfirmOtp} = require('../controllers/userContollers');
 var router = express.Router();
 
 
@@ -13,6 +13,8 @@ router.post('/login',postLogin)
 
 router.get('/login-register',getLoginRegister)
 
+router.get('/signup',getSignUp)
+
 router.post('/signup',postSignup)
 
 router.get('/',homepage)
@@ -24,5 +26,13 @@ router.get('/error',nodata)
 router.get('/cart',getcart)
 
 router.get('/checkout',getcheckout)
+
+router.get('/otp',getOtp)
+
+router.post('/otp',postOtp)
+
+router.get('/confirmotp',confirmOtp)
+
+router.post('/confirmotp',postconfirmOtp)
 
 module.exports = router;

@@ -81,93 +81,27 @@
                             </a>
                         </div>
                         <div class="tab-content">
-                            {{!-- <div id="lg1" class="tab-pane active">
-                                <div class="login-form-container">
-                                    <div class="login-register-form">
-                                        <form action="/login" method="post">
-
-                                            <span class="text-danger" id="email1-error"></span>
-                                            <input type="text" name="email" id="contact1-email" placeholder="Email"
-                                                onkeyup="validateEmail1()">
-
-                                            <span class="text-danger" id="password1-error"></span>
-                                            <input type="password" name="Password" id="contact1-password"
-                                                placeholder="Password" onkeyup="validatePass1()">
-                                            <div class="button-box btn-hover  ">
-                                                <button type="submit" onclick="return validateLogin()">Login</button>
-                                                <span class="text-danger" id="login-error"> </span>
-
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div> --}}
 
 
                             <div id="lg1" class="tab-pane active">
                                 <div class="login-form-container">
                                     <div class="login-register-form">
-                                        <form action="/login" method="post">
+                                        <form action="/confirmotp" method="post">
+                                            <input type="number" name="phone" id="phone"
+                                                placeholder="Type Your Six Digits OTP">
 
-                                            <span class="text-danger" id="email1-error"></span>
-                                            <input type="text" name="email" id="contact1-email" placeholder="Email"
-                                                onkeyup="validateEmail1()">
-
-                                            <span class="text-danger" id="password1-error"></span>
-                                            <input type="password" name="Password" id="contact1-password"
-                                                placeholder="Password" onkeyup="validatePass1()">
                                             <div class="button-box btn-hover  ">
-                                                <button type="submit" onclick="return validateLogin()">Login</button>
-                                                <span class="text-danger" id="login-error"> </span>
-
-                                            </div><br>
-                                            <a href="/otp">OR LOGIN WITH OTP</a>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="lg2" class="tab-pane">
-                                <div class="login-form-container">
-                                    <div class="login-register-form">
-                                        <form action="/signup" method="post">
-
-                                            <!-- <span class=" text-danger" id="email-erorr"></span>
-                                                <input type ="email" id="contact-email" name="user-email" placeholder="Email" onkeyup="validateEmail()"> -->
-                                            <div class="form-outline mb-4 text-danger">
-                                                <span id="email-error"></span>
-
-                                                <input type="email" id="contact-email"
-                                                    class="form-control form-control-lg" name="email"
-                                                    placeholder="Email" onkeyup="validateEmail()">
-                                            </div>
-                                            <span class="text-danger" id="name-error"></span>
-                                            <input type="text" id="contact-name" name="name" placeholder="Username"
-                                                onkeyup="validateName()">
-
-                                            <span class="text-danger" id="phone-error"></span>
-                                            <input type="number" id="contact-phone" name="phone"
-                                                placeholder="Contact-No" onkeyup="validatePhone()">
-
-                                            <span class="text-danger" id="password-error"></span>
-                                            <input type="password" id="contact-password" name="password"
-                                                placeholder="Password" onkeyup="validatePass()">
-
-                                            <span class="text-danger" id="password-error"></span>
-                                            <input type="password" id="contact-Confirmpassword" name=""
-                                                placeholder="Confirm-Password">
-
-                                            <div class="button-box btn-hover">
-                                                <button type="submit" class="btn-success" onkeyup="validatePassword()"
-                                                    onclick="return validateSignup()">Register</button>
-                                                <span class="text-danger" id="submit-error"> </span>
+                                                <button type="submit">Confirm OTP</button>
 
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            
+
+
+
+
                         </div>
                     </div>
                 </div>

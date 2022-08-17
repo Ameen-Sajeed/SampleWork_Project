@@ -34,13 +34,14 @@ const homepage=(req,res)=>{
 /* -------------------------------------------------------------------------- */
 
 const getLogin = (req, res) => {
-    // if(req.session.loggedIn){
-    //     res.redirect('/')
-    // } else{
-    //     res.render('login-register')
-    // }
+    if(req.session.loggedIn){
+        res.redirect('/')
+    } else{
+        res.render('user/login-register',{"loginErr":req.session.loggedErrs})
+        req.session.loggedErrs=false
+    }
 
-    res.render('user/login-register')
+    // res.render('user/login-register')
 }
 
 /* -------------------------------------------------------------------------- */
@@ -51,12 +52,12 @@ const postLogin = (req, res) => {
 
     userhelper.doLogin(req.body).then((response) => {
         if (response.status) {
-            // req.session.Loggedln = true;
-            // req.session.user = response.user
+            req.session.loggedIn=true;
+            req.session.user = response.user
             res.redirect('/')
         } else {
-            // req.session.loginErr=true;
-            res.redirect('/login-register')
+            req.session.loginErrs=true;
+            res.redirect('/login')
         }
     })
 
@@ -72,6 +73,11 @@ const getLoginRegister = (req, res) => {
 }
 
 
+const getSignUp=(req,res)=>{
+    res.render('user/login-register')
+}
+
+
 /* -------------------------------------------------------------------------- */
 /*                                 user Signup                                */
 /* -------------------------------------------------------------------------- */
@@ -80,15 +86,15 @@ const postSignup = (req, res, next) => {
 
     userhelper.doSignup(req.body).then((response) => {
         if (response.status) {
-            response.user.status = true
+            // response.user.status = true
 
-            console.log(req.body)
+            // console.log(req.body)
 
-            res.redirect('/login-register')
+            res.redirect('/signup')
         }
         else {
             console.log(response.status)
-            res.redirect('/login-register')
+            res.redirect('/login')
         }
     })
 
@@ -130,4 +136,52 @@ const getcheckout=(req,res)=>{
     res.render('user/checkout')
 }
 
-module.exports = { getLogin, getLoginRegister, postSignup, postLogin,getproductsDetails,homepage,nodata,getcart,getcheckout }
+/* -------------------------------------------------------------------------- */
+/*                                   GET OTP                                  */
+/* -------------------------------------------------------------------------- */
+
+const getOtp=(req,res)=>{
+    res.render('user/otp')
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                get Confirm OTP                             */
+/* -------------------------------------------------------------------------- */
+
+const confirmOtp=(req,res)=>{
+    res.render('user/confirmotp')
+}
+/* -------------------------------------------------------------------------- */
+/*                                  Post OTP                                  */
+/* -------------------------------------------------------------------------- */
+
+let signupData
+const postOtp=(req,res)=>{
+    userhelper.doOTP(req.body).then((response)=>{
+        if(response.status){
+            signupData=response.user
+            res.redirect('/confirmotp')
+        }
+        else{
+            res.redirect('/otp')
+        }
+    })
+}
+/* -------------------------------------------------------------------------- */
+/*                              POST Confirm OTP                              */
+/* -------------------------------------------------------------------------- */
+
+const postconfirmOtp=(req,res)=>{
+    userhelper.doOTPconfirm(req.body,signupData).then((response)=>{
+        if(response.status){
+        
+            res.redirect('/')
+        }
+        else{
+            res.redirect('/confirmotp')
+        }
+    })
+}
+ 
+module.exports = { getLogin, getLoginRegister, postSignup, postLogin,getproductsDetails,homepage,nodata,getcart,
+    getcheckout,getOtp,confirmOtp,postOtp,postconfirmOtp,getSignUp }
