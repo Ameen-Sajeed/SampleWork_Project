@@ -1,3 +1,4 @@
+require("dotenv").config()
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -11,12 +12,20 @@ const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
 const app = express();
 const db = require('./config/connection')
-
 /* -------------------------------------------------------------------------- */
 /*                              view engine setup                             */
 /* -------------------------------------------------------------------------- */
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+
+app.engine('hbs',hbs.engine({
+  extname:'hbs',defaultLayout:false,layoutsDir:__dirname+'/views/layouts/',partialsDir:__dirname+'/views/partials/',helpers: {
+    inc: function (value, options) {
+      return parseInt(value) + 1;
+    }
+  }
+}))
 
 /* -------------------------------------------------------------------------- */
 /*                           Browser cache clearing                           */
@@ -29,6 +38,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 
 /* -------------------------------------------------------------------------- */
 /*                              Session Creation                              */

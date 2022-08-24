@@ -14,18 +14,31 @@
     <link rel="shortcut icon" href="/Admin/images/favicon.ico">
 
     <!-- Theme Css -->
+    <link type="text/css" href="@@path/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="/Admin/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Admin/css/slidebars.min.css" rel="stylesheet">
     <link href="/Admin/css/icons.css" rel="stylesheet">
     <link href="/Admin/css/menu.css" rel="stylesheet" type="text/css">
     <link href="/Admin/css/style.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
+
+<style>
+         body {
+            color: #333539;
+            background: #303335;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+</style>
 
 <body class="sticky-header">
     <section>
         <!-- sidebar left start-->
-        <div class="sidebar-left bg-dark">
+        <div class="sidebar-left ">
             <div class="sidebar-left-info">
 
                 <div class="user-box">
@@ -77,7 +90,7 @@
                             <li><a href="/admin-products"> View Products</a></li>
                         </ul>
                     </li>
-                    <li class="menu-lists"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Orders </span></a>
+                    <li class="menu-lists"><a href="/admin-orders"><i class="mdi mdi-table"></i> <span>Orders </span></a>
                         <!-- <ul class="child-list">
                                 <li><a href="tables-basic.html"> Basic Table</a></li>
                                 <li><a href="tables-datatable.html"> Data Table</a></li>
@@ -416,26 +429,26 @@
 
                             <!-- File Button -->
                             <div class="form-group">
-                                
+
 
 
 
                                 <label class="col-md-4 control-label" for="filebutton">Choose an image</label>
                                 <div class="col-md-4">
-                                    <img src="" alt="" style="width: 100px; height:auto"
-                                    id="imgView">
-                              
+                                    <img src="" alt="" style="width: 100px; height:auto" id="imgView">
+
                                     <input id="filebutton" name="image" class="input-file" type="file"
                                         onchange="viewImage(event)" multiple>
                                 </div>
                             </div>
-                   
+
 
                             <!-- Button -->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="singlebutton">Add Product</label>
                                 <div class="col-md-4">
-                                    <button id="singlebutton" name="singlebutton" class="btn btn-dark btn-rounded">Add
+                                    <button id="submit" name="singlebutton" onclick="fireSweetAlert()"
+                                        class="btn btn-dark btn-rounded">Add
                                         Product</button>
                                 </div>
                             </div>
@@ -761,12 +774,35 @@
     </section>
 
     <!-- jQuery -->
+    {{!--
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+
     <script>
         function viewImage(event) {
             document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
         }
     </script>
+    <script>
 
+    function fireSweetAlert() {
+        Swal.fire(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+        )
+    }
+
+  </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="/Admin/js/jquery-3.2.1.min.js"></script>
@@ -777,9 +813,14 @@
     <script src="/Admin/js/jquery.slimscroll.min.js"></script>
     <script src="/Admin/js/slidebars.min.js"></script>
 
+    <script src="/javascripts/sweetalert.js"></script>
+
 
     <!--app js-->
+    <script defer src="https://cdn.crop.guide/loader/l.js?c=KDSRNX"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+    <script src="@@path/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="/Admin/js/jquery.app.js"></script>
 </body>
 
-</html>
+</html> 

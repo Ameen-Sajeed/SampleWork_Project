@@ -53,10 +53,10 @@ function validatePhone() {
         phoneError.innerHTML='Only digits please';
         return false;
     }
-    if(phone== 9207830668){
-        phoneError.innerHTML = 'hey its my num bro!'
-        return false;
-    }
+    // if(phone== 9207830668){
+    //     phoneError.innerHTML = 'hey its my num bro!'
+    //     return false;
+    // }
     phoneError.innerHTML= '';
     return true;
 
@@ -75,10 +75,10 @@ function validateEmail(){
         emailError.innerHTML = 'Email Invalid'
         return false;
     }
-    if(email=='ameenputhalath789@gmail.com'){
-        emailError.innerHTML = 'hey its my mail'
-        return false;
-    }
+    // if(email=='ameenputhalath789@gmail.com'){
+    //     emailError.innerHTML = 'hey its my mail'
+    //     return false;
+    // }
 
     emailError.innerHTML = '';
     return true;
@@ -130,10 +130,10 @@ function validateEmail1(){
         email1Error.innerHTML = 'Email Invalid'
         return false;
     }
-    if(email=='ameenputhalath789@gmail.com'){
-        email1Error.innerHTML = 'hey its my mail'
-        return false;
-    }
+    // if(email=='ameenputhalath789@gmail.com'){
+    //     email1Error.innerHTML = 'hey its my mail'
+    //     return false;
+    // }
 
     email1Error.innerHTML = '';
     return true;

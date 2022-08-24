@@ -4,28 +4,28 @@ const adminhelper = require("../helpers/adminhelper")
 const userhelper = require("../helpers/userhelper")
 const { doSignup } = require("../helpers/userhelper")
 
-// const verifyLogin=(req,res,next)=>{
-//     if(req.session.loggedIn){
-//         next();
-//     }
-//     else {
-//         res.redirect('/login-register')
-//     }
-// }
+
 
 /* -------------------------------------------------------------------------- */
 /*                            get landing/homepage                            */
 /* -------------------------------------------------------------------------- */
+let user
+const homepage = async (req, res) => {
+    user = req.session.user
+    var cartcount
+    if (req.session.user) {
+        cartcount = await userhelper.getCartCount(req.session.user._id)
+    }
+    adminhelper.viewProducts().then((product) => {
+        adminhelper.viewCategory().then((category) => {
+            adminhelper.viewBanner().then((banner) => {
+                res.render('user/index', { product, category, user, cartcount, banner });
 
-const homepage=(req,res)=>{
-    // let users=req.session.user
-  adminhelper.viewProducts().then((product)=>{
-   adminhelper.viewCategory().then((category)=>{
-    res.render('user/index', {product,category});
-   })
-  
-  })
- 
+            })
+        })
+
+    })
+
 
 }
 
@@ -34,11 +34,11 @@ const homepage=(req,res)=>{
 /* -------------------------------------------------------------------------- */
 
 const getLogin = (req, res) => {
-    if(req.session.loggedIn){
+    if (req.session.loggedIn) {
         res.redirect('/')
-    } else{
-        res.render('user/login-register',{"loginErr":req.session.loggedErrs})
-        req.session.loggedErrs=false
+    } else {
+        res.render('user/login-register', { "loginErr": req.session.loggedErrs })
+        req.session.loggedErrs = false
     }
 
     // res.render('user/login-register')
@@ -52,15 +52,24 @@ const postLogin = (req, res) => {
 
     userhelper.doLogin(req.body).then((response) => {
         if (response.status) {
-            req.session.loggedIn=true;
+            req.session.loggedIn = true;
             req.session.user = response.user
             res.redirect('/')
         } else {
-            req.session.loginErrs=true;
+            req.session.loginErrs = true;
             res.redirect('/login')
         }
     })
 
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Log Out                                  */
+/* -------------------------------------------------------------------------- */
+
+const logout = (req, res) => {
+    req.session.destroy()
+    res.redirect('/')
 }
 
 
@@ -73,7 +82,7 @@ const getLoginRegister = (req, res) => {
 }
 
 
-const getSignUp=(req,res)=>{
+const getSignUp = (req, res) => {
     res.render('user/login-register')
 }
 
@@ -99,48 +108,115 @@ const postSignup = (req, res, next) => {
     })
 
 }
- /* -------------------------------------------------------------------------- */
- /*                              getProductDetails                             */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                              getProductDetails                             */
+/* -------------------------------------------------------------------------- */
 
- const getproductsDetails=(req,res,next)=>{
-    let proId= req.params.id
+const getproductsDetails = (req, res, next) => {
+    let proId = req.params.id
     console.log(proId)
-    userhelper.Viewproductdetail(req.params.id).then((data)=>{
-        res.render('user/productDetails',data)
+    userhelper.Viewproductdetail(req.params.id).then((data) => {
+        res.render('user/productDetails', data)
     })
-        
-    }
 
- /* -------------------------------------------------------------------------- */
- /*                                  404 Page                                  */
- /* -------------------------------------------------------------------------- */
-
- const nodata=(req,res)=>{
-    res.render('404page')
- }
-
- /* -------------------------------------------------------------------------- */
- /*                                  get cart                                  */
- /* -------------------------------------------------------------------------- */
-
- const getcart=(req,res)=>{
-    res.render('user/cart')
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                  404 Page                                  */
+/* -------------------------------------------------------------------------- */
+
+const nodata = (req, res) => {
+    res.render('404page')
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  get cart                                  */
+/* -------------------------------------------------------------------------- */
+const getcart = async (req, res, next) => {
+    let subtotal;
+
+    let products = await userhelper.viewCartProducts(req.session.user._id)
+    console.log("hjjhdsgjgf");
+    console.log(products);
+
+    subtotal = await userhelper.getSubTotalAmount(req.session.user._id)
+    for (var i = 0; i < products.length; i++) {
+        products[i].subTotal = subtotal[i].suBtotal
+    }
+    let totalValue = await userhelper.getTotalAmount(req.session.user._id)
+
+    console.log(subtotal);
+    console.log(user)
+    res.render('user/cart', { products, user, totalValue })
+
+
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 add to Cart                                */
+/* -------------------------------------------------------------------------- */
+
+const addtocart = (req, res) => {
+    console.log(req.params.id);
+
+    userhelper.addtoCarts(req.params.id, req.session.user._id).then(() => {
+
+
+        res.json({ status: true })
+        // res.redirect('/')
+        // res.send('hai cart')
+    })
+
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 delete Cart                                */
+/* -------------------------------------------------------------------------- */
+
+const deleteCart = (req, res) => {
+    userhelper.deleteCartItems(req.body).then((response) => {
+        res.json(response)
+    })
+
+}
+
 
 /* -------------------------------------------------------------------------- */
 /*                                get checkout                                */
 /* -------------------------------------------------------------------------- */
 
-const getcheckout=(req,res)=>{
-    res.render('user/checkout')
+const getcheckout = async (req, res) => {
+
+    let total = await userhelper.getTotalAmount(req.session.user._id)
+
+    res.render('user/checkout', { total, user: req.session.user })
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                post checkout                               */
+/* -------------------------------------------------------------------------- */
+
+const postcheckout = async (req, res) => {
+    let products = await userhelper.getCartProductList(req.body.userId)
+
+    let totalPrice = await userhelper.getTotalAmount(req.body.userId)
+    console.log(products);
+
+    userhelper.placeOrder(req.body, products, totalPrice).then((response) => {
+        res.json({ status: true,message:"http://localhost:3000/ordersuccess" })
+
+    })
+
+    console.log(req.body);
+
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                   GET OTP                                  */
 /* -------------------------------------------------------------------------- */
 
-const getOtp=(req,res)=>{
+const getOtp = (req, res) => {
     res.render('user/otp')
 }
 
@@ -148,7 +224,7 @@ const getOtp=(req,res)=>{
 /*                                get Confirm OTP                             */
 /* -------------------------------------------------------------------------- */
 
-const confirmOtp=(req,res)=>{
+const confirmOtp = (req, res) => {
     res.render('user/confirmotp')
 }
 /* -------------------------------------------------------------------------- */
@@ -156,13 +232,13 @@ const confirmOtp=(req,res)=>{
 /* -------------------------------------------------------------------------- */
 
 let signupData
-const postOtp=(req,res)=>{
-    userhelper.doOTP(req.body).then((response)=>{
-        if(response.status){
-            signupData=response.user
+const postOtp = (req, res) => {
+    userhelper.doOTP(req.body).then((response) => {
+        if (response.status) {
+            signupData = response.user
             res.redirect('/confirmotp')
         }
-        else{
+        else {
             res.redirect('/otp')
         }
     })
@@ -171,17 +247,64 @@ const postOtp=(req,res)=>{
 /*                              POST Confirm OTP                              */
 /* -------------------------------------------------------------------------- */
 
-const postconfirmOtp=(req,res)=>{
-    userhelper.doOTPconfirm(req.body,signupData).then((response)=>{
-        if(response.status){
-        
+const postconfirmOtp = (req, res) => {
+    userhelper.doOTPconfirm(req.body, signupData).then((response) => {
+        if (response.status) {
+            req.session.loggedIn = true;
+            req.session.user = signupData
+
             res.redirect('/')
         }
-        else{
-            res.redirect('/confirmotp')
+        else {
+            res.redirect('/confirmotp',)
         }
     })
 }
- 
-module.exports = { getLogin, getLoginRegister, postSignup, postLogin,getproductsDetails,homepage,nodata,getcart,
-    getcheckout,getOtp,confirmOtp,postOtp,postconfirmOtp,getSignUp }
+
+const getProfile = (req, res) => {
+    res.render('user/userProfile')
+}
+
+/* -------------------------------------------------------------------------- */
+/*                           change product Quantity                          */
+/* -------------------------------------------------------------------------- */
+
+
+const changeproductquantity = (req, res, next) => {
+    console.log(req.body);
+
+
+    userhelper.changeProductQuantity(req.body).then(async (response) => {
+        console.log('response');
+        console.log(response);
+        response.total = await userhelper.getTotalAmount(req.body.user)
+        response.subtotal = await userhelper.getSubTotal(req.body)
+
+        // response.total=data
+
+        res.json(response)
+
+    })
+
+
+}
+
+
+
+const vegetables = (req, res) => {
+    //  let subtotal= await userhelper.getSubTotalAmount(req.session.user._id)
+
+    res.render('user/veg')
+}
+
+
+
+const orderplaced=(req,res)=>{
+    res.render('user/orderplaced')
+}
+
+module.exports = {
+    getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart,
+    getcheckout, getOtp, confirmOtp, postOtp, postconfirmOtp, getSignUp, addtocart, logout, getProfile,
+    changeproductquantity, vegetables, postcheckout, deleteCart,orderplaced
+}

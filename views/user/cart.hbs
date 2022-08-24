@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="/user/css/plugins/easyzoom.css" />
     <link rel="stylesheet" href="/user/css/plugins/slinky.css" />
     <link rel="stylesheet" href="/user/css/style.css" />
+
 </head>
 
 
@@ -51,6 +52,50 @@
 
 <body>
     <div class="main-wrapper main-wrapper-2">
+        <div class="header-top d-none d-lg-block bg-gray">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-6">
+                        <div class="welcome-text">
+                            {{#if user}}
+                            <p>Welcome {{user.name}}</p>
+                            {{else}}
+                            <p> Welcome Please Login! </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-6">
+                        <div class="language-currency-wrap">
+                            <div class="currency-wrap border-style">
+                                <a class="currency-active" href="#">Account<i class=" ti-angle-down "></i></a>
+                                <div class="currency-dropdown">
+                                    <ul>
+                                        <li><a href="#"> Profile</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                        <li><a href="/user-logout">Log Out </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="language-wrap">
+                                <a class="language-active" href="#"><img src="assets/images/icon-img/flag.png" alt="">
+                                    English <i class=" ti-angle-down "></i></a>
+                                <div class="language-dropdown">
+                                    <ul>
+                                        <li><a href="#"><img src="assets/images/icon-img/flag.png" alt="">English </a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/images/icon-img/spanish.png" alt="">Spanish</a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/images/icon-img/arabic.png" alt="">Arabic </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <header class="header-area header-responsive-padding header-height-1">
             <div class="header-top d-none d-lg-block bg-gray">
                 <div class="container">
@@ -129,7 +174,7 @@
                                 </div>
                                 <div class="header-action-style header-action-cart">
                                     <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
-                                        <span class="product-count bg-black">01</span>
+                                        <span class="product-count "></span>
                                     </a>
                                 </div>
                                 <div class="header-action-style d-block d-lg-none">
@@ -190,7 +235,7 @@
                 <div class="breadcrumb-content text-center">
                     <h2>Cart</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><i class="ti-angle-right"></i></li>
                         <li>Cart</li>
                     </ul>
@@ -207,79 +252,71 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form action="#">
+                        <form>
                             <div class="cart-table-content">
                                 <div class="table-content table-responsive">
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th class="width-thumbnail"></th>
-                                                <th class="width-name">Product</th>
+                                                <th class="width-thumbnail">Product</th>
+                                                <th class="width-name">Product Name</th>
                                                 <th class="width-price"> Price</th>
                                                 <th class="width-quantity">Quantity</th>
                                                 <th class="width-subtotal">Subtotal</th>
-                                                <th class="width-remove"></th>
+                                                <th class="width-remove">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {{#each products}}
                                             <tr>
+                                                {{!-- {{#each product}} --}}
                                                 <td class="product-thumbnail">
                                                     <a href="product-details.html"><img
-                                                            src="assets/images/cart/cart-1.jpg" alt=""></a>
+                                                            src="/Admin/images/{{this.product.image.[0]}}" alt=""></a>
                                                 </td>
                                                 <td class="product-name">
-                                                    <h5><a href="product-details.html">Stylish Swing Chair</a></h5>
+                                                    <h5><a href="product-details.html">{{this.product.name}}</a></h5>
                                                 </td>
-                                                <td class="product-cart-price"><span class="amount">$120.00</span></td>
+                                                <td class="product-cart-price"><span
+                                                        class="amount">₹{{this.product.price}}</span>
+                                                    {{!-- {{/each}} --}}
+
+                                                </td>
                                                 <td class="cart-quality">
-                                                    <div class="product-quality">
-                                                        <input class="cart-plus-minus-box input-text qty text"
-                                                            name="qtybutton" value="1">
-                                                    </div>
+                                                    {{!-- <div class="product-quality"> --}}
+
+                                                        {{!-- <input class="cart-plus-minus-box input-text qty text"
+                                                            onclick="changeQuantity('{{this._id}}','{{this.product._id}},-1);
+                                                            changeQuantity('{{this._id}}','{{this.product._id}}',1)"
+                                                            name="qtybutton" value=" {{this.quantity}}"> --}}
+
+                                                        <button class="cart-item-count mr-3 "
+                                                            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
+                                                        {{!-- <p>{{../user._id}}</p> --}}
+
+                                                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+
+
+                                                        <button class="cart-item-count ml-3"
+                                                            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button>
+
+
                                                 </td>
-                                                <td class="product-total"><span>$120.00</span></td>
-                                                <td class="product-remove"><a href="#"><i class=" ti-trash "></i></a>
+                                                <td class="product-total"><span
+                                                        id="a{{this.product._id}}">{{this.subTotal}}</span></td>
+
+                                                <td class="product-remove"><a class="btn"
+                                                        onclick="deleteItem('{{this._id}}','{{this.product._id}}')"><i
+                                                            class=" ti-trash "></i></a>
                                                 </td>
+
                                             </tr>
-                                            <tr>
-                                                <td class="product-thumbnail">
-                                                    <a href="product-details.html"><img
-                                                            src="assets/images/cart/cart-2.jpg" alt=""></a>
-                                                </td>
-                                                <td class="product-name">
-                                                    <h5><a href="product-details.html">Modern Lounge Chairs</a></h5>
-                                                </td>
-                                                <td class="product-cart-price"><span class="amount">$120.00</span></td>
-                                                <td class="cart-quality">
-                                                    <div class="product-quality">
-                                                        <input class="cart-plus-minus-box input-text qty text"
-                                                            name="qtybutton" value="1">
-                                                    </div>
-                                                </td>
-                                                <td class="product-total"><span>$120.00</span></td>
-                                                <td class="product-remove"><a href="#"><i class=" ti-trash "></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product-thumbnail">
-                                                    <a href="product-details.html"><img
-                                                            src="assets/images/cart/cart-3.jpg" alt=""></a>
-                                                </td>
-                                                <td class="product-name">
-                                                    <h5><a href="product-details.html">Modern Swivel Chair</a></h5>
-                                                </td>
-                                                <td class="product-cart-price"><span class="amount">$120.00</span></td>
-                                                <td class="cart-quality">
-                                                    <div class="product-quality">
-                                                        <input class="cart-plus-minus-box input-text qty text"
-                                                            name="qtybutton" value="1">
-                                                    </div>
-                                                </td>
-                                                <td class="product-total"><span>$120.00</span></td>
-                                                <td class="product-remove"><a href="#"><i class=" ti-trash "></i></a>
-                                                </td>
-                                            </tr>
+                                            {{/each}}
+                                            {{!-- {{#for 0 10 2}} --}}
+                                            {{!-- {{/for}} --}}
+
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
@@ -304,7 +341,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12">
+                    {{!-- <div class="col-lg-4 col-md-6 col-12">
                         <div class="cart-calculate-discount-wrap mb-40">
                             <h4>Calculate shipping </h4>
                             <div class="calculate-discount-content">
@@ -337,7 +374,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="cart-calculate-discount-wrap mb-40">
                             <h4>Coupon Discount </h4>
@@ -355,7 +392,7 @@
                     <div class="col-lg-4 col-md-12 col-12">
                         <div class="grand-total-wrap">
                             <div class="grand-total-content">
-                                <h3>Subtotal <span>$180.00</span></h3>
+                                <h3>Subtotal <span>{{subtotal}}</span></h3>
                                 <div class="grand-shipping">
                                     <span>Shipping</span>
                                     <ul>
@@ -371,11 +408,11 @@
                                     <p>Shipping to Bangladesh</p>
                                 </div>
                                 <div class="grand-total">
-                                    <h4>Total <span>$185.00</span></h4>
+                                    <h4>Total <span id="total">₹{{totalValue}}</span></h4>
                                 </div>
                             </div>
                             <div class="grand-total-btn btn-hover">
-                                <a class="btn theme-color" href="checkout.html">Proceed to checkout</a>
+                                <a class="btn theme-color" href="/checkout">Proceed to checkout</a>
                             </div>
                         </div>
                     </div>
@@ -557,6 +594,11 @@
         </div>
     </div>
     <!-- All JS is here -->
+
+
+    <script src="/javascripts/ajax.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/user/js/vendor/modernizr-3.11.7.min.js"></script>
     <script src="/user/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="/user/js/vendor/jquery-migrate-3.3.2.min.js"></script>
@@ -580,7 +622,10 @@
     <script src="/user/js/plugins/slinky.min.js"></script>
     <script src="/user/js/plugins/ajax-mail.js"></script>
     <!-- Main JS -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/user/js/main.js"></script>
+
+
 </body>
 
 </html>

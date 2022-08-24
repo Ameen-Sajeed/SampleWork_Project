@@ -20,11 +20,18 @@
     <link href="/Admin/css/menu.css" rel="stylesheet" type="text/css">
     <link href="/Admin/css/style.css" rel="stylesheet">
 </head>
-
+<style>
+         body {
+            color: #333539;
+            background: #303335;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+</style>
 <body class="sticky-header">
     <section>
         <!-- sidebar left start-->
-        <div class="sidebar-left bg-dark">
+        <div class="sidebar-left ">
             <div class="sidebar-left-info">
 
                 <div class="user-box">
@@ -69,12 +76,12 @@
 
                         </ul> --}}
                     </li>
-                      <li class="menu-list"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Banner</span></a>
-                         <ul class="child-list">
-                                <li><a href="/admin-addbanner"> Add a Banner</a></li>
-                                <li><a href="/admin-banner"> View Banners</a></li>
-                            
-                            </ul> 
+                    <li class="menu-list"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Banner</span></a>
+                        <ul class="child-list">
+                            <li><a href="/admin-addbanner"> Add a Banner</a></li>
+                            <li><a href="/admin-banner"> View Banners</a></li>
+
+                        </ul>
                     </li>
                     <li class="menu-list"><a href="/admin/admin-products"><i class="mdi mdi-diamond"></i>
                             <span>Products</span></a>
@@ -83,7 +90,7 @@
                             <li><a href="/admin-products"> View Products</a></li>
                         </ul>
                     </li>
-                    <li class="menu-lists"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Orders </span></a>
+                    <li class="menu-lists"><a href="/admin-orders"><i class="mdi mdi-table"></i> <span>Orders </span></a>
                         <!-- <ul class="child-list">
                                 <li><a href="tables-basic.html"> Basic Table</a></li>
                                 <li><a href="tables-datatable.html"> Data Table</a></li>
@@ -135,8 +142,8 @@
                 <div class="logo bg-dark">
                     <a href="index.html">
                         <span class="logo-img">
-                            {{!-- <img src="/Admin/images/c8192ec97097433bac582406af5cb088__1_-removebg-preview.png" alt="" --}}
-                                {{!-- height="76"> --}}
+                            {{!-- <img src="/Admin/images/c8192ec97097433bac582406af5cb088__1_-removebg-preview.png"
+                                alt="" --}} {{!-- height="76"> --}}
                         </span>
                         <!--<i class="fa fa-maxcdn"></i>-->
                         <span class="brand-name">Harvest </span>
@@ -351,7 +358,8 @@
                             <div class="card m-b-30">
                                 <div class="card-body">
                                     <h5 class="header-title">Edit Your Banners Here</h5>
-                                    {{!-- <p class="text-muted">Add toolbar column with edit and delete buttons.</p> --}}
+                                    {{!-- <p class="text-muted">Add toolbar column with edit and delete buttons.</p>
+                                    --}}
                                     <div class="">
 
                                         <table class="table" id="my-table">
@@ -360,7 +368,10 @@
                                                     <th>S-NO:</th>
                                                     <th>Image</th>
                                                     <th>Bannername</th>
-                                                    <th>Description</th>
+                                                    <th>Description1</th>
+                                                    <th>Description2</th>
+                                                    <th>Description3</th>
+
                                                     <th>Action </th>
 
                                                 </tr>
@@ -369,21 +380,26 @@
                                             <tbody>
                                                 <tr>
                                                     <td>{{@index}}</td>
-                                                   <td><img style="width:110px;height:130px"
+                                                    <td><img style="width:110px;height:130px"
                                                             src="/Admin/images/{{this.image.[0]}}" alt="pic"></td>
                                                     <td>{{this.name}}</td>
-                                                    <td>{{this.description}}</td>
+                                                    <td>{{this.description1}}</td>
+                                                    <td>{{this.description2}}</td>
+                                                    <td>{{this.description3}}</td>
+
+
                                                     {{!-- <td>
                                                         <a href="/admin-deleteProduct/{{this._id}}"
                                                             class="btn btn-danger ">DELETE</a>
-                                                        <a href="/admin-updateproducts/{{this._id}}" class="btn btn-info">EDIT</a>
+                                                        <a href="/admin-updateproducts/{{this._id}}"
+                                                            class="btn btn-info">EDIT</a>
                                                     </td> --}}
 
 
-                                                     <td>
+                                                    <td>
 
                                                         <div class="btn-group">
-                                                            <a href="#"
+                                                            <a href="/admin-deletebanner/{{this._id}}"
                                                                 class="btn btn-dark  text-white  btn-rounded text-align-center mt-4 pt-3"
                                                                 data-placement="top" data-toggle="tooltip"
                                                                 data-original-title="DELETE">
@@ -449,6 +465,4 @@
 </html>
 
 
- <td>
-
-                               
+<td>

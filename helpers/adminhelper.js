@@ -23,7 +23,7 @@ module.exports = {
 
   blockUser: (proId) => {
     return new Promise(async (resolve, reject) => {
-      await db.get().collection(collection.USERCOLLECTION).updateOne({ _id: objectId(proId) }, { $set: { state: "blocked" } }).then((data) => {
+      await db.get().collection(collection.USERCOLLECTION).updateOne({ _id: objectId(proId) }, { $set: { state: false } }).then((data) => {
         console.log(data)
         resolve(data)
       })
@@ -36,7 +36,7 @@ module.exports = {
   /* -------------------------------------------------------------------------- */
   unblockUser: (proId) => {
     return new Promise(async (resolve, reject) => {
-      await db.get().collection(collection.USERCOLLECTION).updateOne({ _id: objectId(proId) }, { $set: { state: "active" } }).then((data) => {
+      await db.get().collection(collection.USERCOLLECTION).updateOne({ _id: objectId(proId) }, { $set: { state: true } }).then((data) => {
         console.log(data)
         resolve(data)
       })
@@ -63,6 +63,7 @@ module.exports = {
   /* -------------------------------------------------------------------------- */
 
   addproduct: (productData) => {
+    console.log(productData);
     return new Promise(async (resolve, reject) => {
       let data = await db.get().collection(collection.PRODUCTCOLLECTION).insertOne(productData)
       resolve(data)
@@ -101,7 +102,7 @@ module.exports = {
           price: product.price,
           inventory: product.inventory,
           description: product.description,
-          image:product.image
+          image: product.image
         }
       }).then((data) => {
         // console.log(data);
@@ -165,77 +166,87 @@ module.exports = {
   /*                                 view Banner                                */
   /* -------------------------------------------------------------------------- */
 
-viewBanner: (banner)=>{
-  return new Promise(async (resolve,reject)=>{
-    let banner = await db.get().collection(collection.BANNERCOLLECTION).find().toArray()
-    resolve(banner)
-    console.log(banner)
-  })
-},
+  viewBanner: (banner) => {
+    return new Promise(async (resolve, reject) => {
+      let banner = await db.get().collection(collection.BANNERCOLLECTION).find().toArray()
+      resolve(banner)
+      console.log(banner)
+    })
+  },
 
-/* -------------------------------------------------------------------------- */
-/*                                 Add Banner                                 */
-/* -------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------- */
+  /*                                 Add Banner                                 */
+  /* -------------------------------------------------------------------------- */
 
-addBanner: (banner) => {
+  addBanner: (banner) => {
 
-  return new Promise(async (resolve, reject) => {
-    let data = await db.get().collection(collection.BANNERCOLLECTION).insertOne(banner)
-    resolve(data)
-    // console.log(data)
-  })
-},
+    return new Promise(async (resolve, reject) => {
+      let data = await db.get().collection(collection.BANNERCOLLECTION).insertOne(banner)
+      resolve(data)
+      // console.log(data)
+    })
+  },
 
-/* -------------------------------------------------------------------------- */
-/*                              getUpdate Banner                              */
-/* -------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------- */
+  /*                              getUpdate Banner                              */
+  /* -------------------------------------------------------------------------- */
 
-ViewUpdateBanner: (Id) => {
-  return new Promise(async (resolve, reject) => {
-    let data = await db.get().collection(collection.BANNERCOLLECTION).findOne({ _id: objectId(Id) })
-    resolve(data)
-  })
-},
-
-
-/* -------------------------------------------------------------------------- */
-/*                                Update Banner                               */
-/* -------------------------------------------------------------------------- */
-
-updateBanner: (Id, banner) => {
-  console.log(Id);
-  return new Promise(async (resolve, reject) => {
-    await db.get().collection(collection.BANNERCOLLECTION).updateOne({ _id: objectId(Id) }, {
-      $set: {
-        name: banner.name,
-        index: banner.index,
-        description: banner.description
-      }
-    }).then((data) => {
-      console.log(data);
+  ViewUpdateBanner: (Id) => {
+    return new Promise(async (resolve, reject) => {
+      let data = await db.get().collection(collection.BANNERCOLLECTION).findOne({ _id: objectId(Id) })
       resolve(data)
     })
-  })
-},
+  },
 
-/* -------------------------------------------------------------------------- */
-/*                                delete Banner                               */
-/* -------------------------------------------------------------------------- */
 
-deleteBanner: (delId) => {
-  return new Promise(async (resolve, reject) => {
-    await db.get().collection(collection.BANNERCOLLECTION).deleteOne({ _id: objectId(delId) }).then((data) => {
+  /* -------------------------------------------------------------------------- */
+  /*                                Update Banner                               */
+  /* -------------------------------------------------------------------------- */
 
-      console.log(data)
-      resolve(data)
+  updateBanner: (Id, banner) => {
+    console.log(Id);
+    return new Promise(async (resolve, reject) => {
+      await db.get().collection(collection.BANNERCOLLECTION).updateOne({ _id: objectId(Id) }, {
+        $set: {
+          name: banner.name,
+          index: banner.index,
+          description: banner.description
+        }
+      }).then((data) => {
+        console.log(data);
+        resolve(data)
+      })
+    })
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /*                                delete Banner                               */
+  /* -------------------------------------------------------------------------- */
+
+  deleteBanner: (delId) => {
+    return new Promise(async (resolve, reject) => {
+      await db.get().collection(collection.BANNERCOLLECTION).deleteOne({ _id: objectId(delId) }).then((data) => {
+
+        console.log(data)
+        resolve(data)
+
+      })
 
     })
+  },
 
+
+/* -------------------------------------------------------------------------- */
+/*                                 View Orders                                */
+/* -------------------------------------------------------------------------- */
+
+viewOrders: (order) => {
+  return new Promise(async (resolve, reject) => {
+    let order = await db.get().collection(collection.ORDERCOLLECTION).find().toArray()
+    resolve(order)
+    console.log(order)
   })
 },
 
 
 }
-
-
-

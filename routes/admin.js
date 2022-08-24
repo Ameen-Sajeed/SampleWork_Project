@@ -1,5 +1,5 @@
 const express = require('express');
-const { admindashboard, getproducts, getUsers, getLogin, getaddproducts, postLogin, getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers, deleteProducts, viewCategory, deletecategorys, updateproduct, getupdateproduct, postupdateproduct, getBanner, addBanner, postaddBanner } = require('../controllers/adminContollers');
+const { admindashboard, getproducts, getUsers, getLogin, getaddproducts, postLogin, getlogout, postaddproducts, getCategory, postCategory, blockUsers, unblockUsers, deleteProducts, viewCategory, deletecategorys, updateproduct, getupdateproduct, postupdateproduct, getBanner, addBanner, postaddBanner, deleteBanner, viewOrders } = require('../controllers/adminContollers');
 const adminhelper = require('../helpers/adminhelper')
 const router = express.Router();
 const multer = require('../helpers/multer')
@@ -42,7 +42,7 @@ router.get('/admin-deleteProduct/:id', deleteProducts)
 
 router.get('/admin-updateproducts/:id', getupdateproduct)
 
-router.post('/admin-updateproducts/:id',multer.array('image',4), postupdateproduct)
+router.post('/admin-updateproducts/:id', multer.array('image', 4), postupdateproduct)
 
 
 /* -------------------------------------------------------------------------- */
@@ -62,12 +62,18 @@ router.get('/admin-deletecategory/:id', deletecategorys)
 /*                                Banner Routes                               */
 /* -------------------------------------------------------------------------- */
 
-router.get('/admin-banner',getBanner)
+router.get('/admin-banner', getBanner)
 
-router.get('/admin-addbanner',addBanner)
+router.get('/admin-addbanner', addBanner)
 
-router.post('/admin-addbanner',multer.array('image'),postaddBanner)
+router.get('/admin-deletebanner/:id', deleteBanner)
 
+
+router.post('/admin-addbanner', multer.array('image'), postaddBanner)
+
+
+
+router.get('/admin-orders',viewOrders)
 
 module.exports = router;
 

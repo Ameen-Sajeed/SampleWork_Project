@@ -21,10 +21,19 @@
     <link href="/Admin/css/style.css" rel="stylesheet">
 </head>
 
+<style>
+         body {
+            color: #333539;
+            background: #303335;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+</style>
+
 <body class="sticky-header">
     <section>
         <!-- sidebar left start-->
-        <div class="sidebar-left bg-dark">
+        <div class="sidebar-left  md-6">
             <div class="sidebar-left-info">
 
                 <div class="user-box">
@@ -128,7 +137,7 @@
         </div><!-- sidebar left end-->
 
         <!-- body content start-->
-        <div class="body-content bg-dark">
+        <div class="body-content  bg-dark">
             <!-- header section start-->
             <div class="header-section">
                 <!--logo and logo icon start-->
@@ -371,14 +380,14 @@
                                             {{#each product}}
                                             <tbody>
                                                 <tr>
-                                                    <td>{{@index}}</td>
+                                                    <td>{{ inc @index}}</td>
                                                     <td><img style="width:110px;height:130px"
                                                             src="/Admin/images/{{this.image.[0]}}" alt="pic"></td>
                                                     <td>{{this.name}}</td>
                                                     <td>{{this.category}}</td>
                                                     <td>{{this.inventory}}</td>
                                                     <td>{{this.price}}</td>
-                                                    <td>{{this.description}}</td>
+                                                    <td class="d-inline-block text-truncate" style="max-width: 150px;">{{this.description}}</td>
                                                     {{!-- <td>
                                                         <a href="/admin-deleteProduct/{{this._id}}"
                                                             class="btn btn-danger ">DELETE</a>

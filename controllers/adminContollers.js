@@ -1,18 +1,19 @@
 const { addproduct } = require("../helpers/adminhelper")
 const adminhelper = require("../helpers/adminhelper")
 const userhelper = require("../helpers/userhelper")
+const sharp =require('sharp')
 
 
-const admin ={
+const admin = {
     myEmail: "ameen@gmail.com",
-    myPassword:123
+    myPassword: 123
 }
- /* -------------------------------------------------------------------------- */
- /*                                  get Login                                 */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                  get Login                                 */
+/* -------------------------------------------------------------------------- */
 
 const getLogin = (req, res) => {
-   
+
     // if(req.session.admin){
     //     res.redirect('/admindashboard')
     // }
@@ -23,116 +24,117 @@ const getLogin = (req, res) => {
     res.render('admin/adminLogin')
 }
 
- /* -------------------------------------------------------------------------- */
- /*                                 Post Login                                 */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                 Post Login                                 */
+/* -------------------------------------------------------------------------- */
 
 const postLogin = (req, res) => {
     const { email, password } = req.body;
     if (email == admin.myEmail && password == admin.myPassword) {
-    
+
         req.session.admin = req.body.email;
         res.redirect('/admindashboard')
     } else {
-    
+
         req.flash('msg', 'INCORRECT DETAILS');
         res.redirect('/admin-login');
     }
-    }
+}
 
 
- /* -------------------------------------------------------------------------- */
- /*                                 Get Logout                                 */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                 Get Logout                                 */
+/* -------------------------------------------------------------------------- */
 
-    const getlogout = (req, res) => {
-        req.session.destroy(function (err) {
-            if (err) {
-                console.log(err)
-                res.send('error')
-            }
-            else {
-                res.redirect('/admin-login')
-            }
-        })
-    }
-    
+const getlogout = (req, res) => {
+    req.session.destroy(function (err) {
+        if (err) {
+            console.log(err)
+            res.send('error')
+        }
+        else {
+            res.redirect('/admin-login')
+        }
+    })
+}
 
-  /* -------------------------------------------------------------------------- */
-  /*                             get Admindashboard                             */
-  /* -------------------------------------------------------------------------- */
 
-const admindashboard=(req,res)=>{
+/* -------------------------------------------------------------------------- */
+/*                             get Admindashboard                             */
+/* -------------------------------------------------------------------------- */
+
+const admindashboard = (req, res) => {
 
     res.render('admin/Admin-dashboard')
 }
 
- /* -------------------------------------------------------------------------- */
- /*                                  get Users                                 */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                  get Users                                 */
+/* -------------------------------------------------------------------------- */
 
-const getUsers=(req,res)=>{
-   adminhelper.viewUsers().then((data)=>{
-    console.log(data)
-    res.render('admin/User',{data})
-   })
-    
+const getUsers = (req, res) => {
+    adminhelper.viewUsers().then((data) => {
+        console.log(data)
+        res.render('admin/User', { data })
+    })
+
 }
 
-  /* -------------------------------------------------------------------------- */
-  /*                                 block Users                                */
-  /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                 block Users                                */
+/* -------------------------------------------------------------------------- */
 
-  const blockUsers=(req,res)=>{
+const blockUsers = (req, res) => {
     let proId = req.params.id
     console.log(proId)
-    adminhelper.blockUser(proId).then((data)=>{
+    adminhelper.blockUser(proId).then((data) => {
         res.redirect('/admin-users')
     })
 }
 
 /* -------------------------------------------------------------------------- */
- /*                                unblock Users                               */
- /* -------------------------------------------------------------------------- */
+/*                                unblock Users                               */
+/* -------------------------------------------------------------------------- */
 
- const unblockUsers=(req,res)=>{
+const unblockUsers = (req, res) => {
     let proId = req.params.id
     console.log(proId)
-    adminhelper.unblockUser(proId).then((data)=>{
+    adminhelper.unblockUser(proId).then((data) => {
         res.redirect('/admin-users')
     })
 }
 
- /* -------------------------------------------------------------------------- */
- /*                                get Products                                */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                get Products                                */
+/* -------------------------------------------------------------------------- */
 
- const getproducts=(req,res)=>{
-    adminhelper.viewProducts().then((product)=>{
+const getproducts = (req, res) => {
+    adminhelper.viewProducts().then((product) => {
         // console.log(product)
-        res.render('admin/product',{product})
+        res.render('admin/product', { product })
     })
 }
 
 
- /* -------------------------------------------------------------------------- */
- /*                               get addproduct                               */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                               get addproduct                               */
+/* -------------------------------------------------------------------------- */
 
-const getaddproducts=(req,res)=>{
-   
-adminhelper.viewCategory().then((category)=>{
-    res.render('admin/addproduct',{category:category})
-})
+const getaddproducts = (req, res) => {
 
-    
+    adminhelper.viewCategory().then((category) => {
+        res.render('admin/addproduct', { category: category })
+    })
+
+
 }
 
 /* -------------------------------------------------------------------------- */
 /*                               post addproduct                              */
 /* -------------------------------------------------------------------------- */
 
-const postaddproducts=(req,res)=>{
+const postaddproducts = (req, res) => {
+    console.log(req.files);
     const filename = req.files.map(function (file) {
         return file.filename
     })
@@ -150,32 +152,55 @@ const postaddproducts=(req,res)=>{
     })
 }
 
+// const postaddproducts = (req, res) => {
+//     const filename = req.files.map(function (file) {
+//         return file.filename
+//     })
+//     req.body.image = filename
+
+//     sharp(req.body.image)
+//     .resize({width:250, height:350})
+
+
+//     adminhelper.addproduct(req.body).then((response) => {
+//         if (response.status) {
+//             res.redirect('/admin-addproduct')
+//         } else {
+//             // res.send('product added')
+//             res.redirect('/admin-products')
+
+
+//         }
+
+//     })
+// }
+
 
 /* -------------------------------------------------------------------------- */
 /*                               delete products                              */
 /* -------------------------------------------------------------------------- */
 
-const deleteProducts=(req,res)=>{
+const deleteProducts = (req, res) => {
 
-    let delId= req.params.id
-    adminhelper.deleteproduct(delId).then((data)=>{
+    let delId = req.params.id
+    adminhelper.deleteproduct(delId).then((data) => {
         res.redirect('/admin-products')
     })
 
 }
- /* -------------------------------------------------------------------------- */
- /*                               update Product                               */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                               update Product                               */
+/* -------------------------------------------------------------------------- */
 
- const getupdateproduct=(req,res)=>{
-  
-    let Id=req.params.id
-    adminhelper.ViewUpdateproduct(Id).then((data)=>{
-       adminhelper.viewCategory().then((category)=>{
-        console.log(data)
-        res.render('admin/updateproduct',{data,category})
-       }) 
-     
+const getupdateproduct = (req, res) => {
+
+    let Id = req.params.id
+    adminhelper.ViewUpdateproduct(Id).then((data) => {
+        adminhelper.viewCategory().then((category) => {
+            console.log(data)
+            res.render('admin/updateproduct', { data, category })
+        })
+
     })
 }
 
@@ -183,17 +208,17 @@ const deleteProducts=(req,res)=>{
 /*                             Post update Product                            */
 /* -------------------------------------------------------------------------- */
 
-const postupdateproduct=(req,res)=>{
+const postupdateproduct = (req, res) => {
 
     // console.log(req.files)
-    const filename = req.files.map(function(file){
+    const filename = req.files.map(function (file) {
         return file.filename
     })
     req.body.image = filename
 
     let Id = req.params.id
     console.log(req.body);
-    adminhelper.updateProduct(Id,req.body).then((data)=>{
+    adminhelper.updateProduct(Id, req.body).then((data) => {
         // console.log(data)
         res.redirect('/admin-products')
     })
@@ -205,18 +230,18 @@ const postupdateproduct=(req,res)=>{
 /*                                get Category                                */
 /* -------------------------------------------------------------------------- */
 
-const getCategory=(req,res)=>{
-  adminhelper.viewCategory().then((category)=>{
-    res.render('admin/category',{category})
-  })  
+const getCategory = (req, res) => {
+    adminhelper.viewCategory().then((category) => {
+        res.render('admin/category', { category })
+    })
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                post category                               */
 /* -------------------------------------------------------------------------- */
 
-const postCategory=(req,res)=>{
-    adminhelper.addcategory(req.body).then((data)=>{
+const postCategory = (req, res) => {
+    adminhelper.addcategory(req.body).then((data) => {
         console.log(data)
         res.redirect('/admin-category')
     })
@@ -224,11 +249,11 @@ const postCategory=(req,res)=>{
 
 }
 
- /* -------------------------------------------------------------------------- */
- /*                                view Category                               */
- /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                view Category                               */
+/* -------------------------------------------------------------------------- */
 
-const viewCategory=(req,res)=>{
+const viewCategory = (req, res) => {
     res.render('admin/viewCategory')
 }
 
@@ -236,9 +261,9 @@ const viewCategory=(req,res)=>{
 /*                               delete category                              */
 /* -------------------------------------------------------------------------- */
 
-const deletecategorys=(req,res)=>{
-    let catId=req.params.id
-    adminhelper.deletecategory(catId).then((data)=>{
+const deletecategorys = (req, res) => {
+    let catId = req.params.id
+    adminhelper.deletecategory(catId).then((data) => {
         res.redirect('/admin-category')
     })
 }
@@ -247,28 +272,28 @@ const deletecategorys=(req,res)=>{
 /*                                 View Banner                                */
 /* -------------------------------------------------------------------------- */
 
-const getBanner=(req,res)=>{
-    adminhelper.viewBanner().then((banner)=>{
-
-    res.render('admin/viewBanner',{banner})
-})
+const getBanner = (req, res) => {
+    adminhelper.viewBanner().then((banner) => {
+        console.log(banner);
+        res.render('admin/viewBanner', { banner })
+    })
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                 Add Banner                                 */
 /* -------------------------------------------------------------------------- */
 
-const addBanner=(req,res)=>{
-        res.render('admin/addBanner')
+const addBanner = (req, res) => {
+    res.render('admin/addBanner')
 
-   
+
 }
 
 /* -------------------------------------------------------------------------- */
 /*                               Post AddBanner                               */
 /* -------------------------------------------------------------------------- */
 
-const postaddBanner=(req,res)=>{
+const postaddBanner = (req, res) => {
     console.log(req.body)
 
     const filename = req.files.map(function (file) {
@@ -277,10 +302,10 @@ const postaddBanner=(req,res)=>{
     req.body.image = filename
     adminhelper.addBanner(req.body).then((response) => {
         if (response.status) {
-            res.redirect('/admin-addproduct')
+            res.redirect('/admin-addbanner')
         } else {
             // res.send('product added')
-            res.redirect('/admin-products')
+            res.redirect('/admin-banner')
 
 
         }
@@ -289,9 +314,32 @@ const postaddBanner=(req,res)=>{
 
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                delete Banner                               */
+/* -------------------------------------------------------------------------- */
+
+const deleteBanner = (req, res) => {
+
+    let delId = req.params.id
+    adminhelper.deleteBanner(delId).then((data) => {
+        res.redirect('/admin-banner')
+    })
+
+}
 
 
-module.exports =  {admindashboard,getproducts,getUsers,
-    getLogin,getaddproducts,postLogin,getlogout,getCategory,postCategory,
-    blockUsers,unblockUsers,deleteProducts,viewCategory,deletecategorys,
-    getupdateproduct,postupdateproduct,postaddproducts,getBanner,addBanner,postaddBanner} ;
+const viewOrders=(req,res)=>{
+    adminhelper.viewOrders().then((orders)=>{
+        res.render('admin/viewOrders',{orders})
+
+    })
+}
+
+
+
+module.exports = {
+    admindashboard, getproducts, getUsers,
+    getLogin, getaddproducts, postLogin, getlogout, getCategory, postCategory,
+    blockUsers, unblockUsers, deleteProducts, viewCategory, deletecategorys,
+    getupdateproduct, postupdateproduct, postaddproducts, getBanner, addBanner, postaddBanner, deleteBanner,viewOrders
+};

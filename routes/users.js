@@ -1,5 +1,8 @@
 var express = require('express');
-const { getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart, getcheckout, getOtp, confirmOtp, postOtp, getSignUp, postconfirmOtp} = require('../controllers/userContollers');
+const { getlogout } = require('../controllers/adminContollers');
+const { getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart, getcheckout, getOtp, confirmOtp, postOtp, getSignUp, postconfirmOtp, addtocart, logout, getProfile, changeproductquantity, vegetables, postcheckout, deleteCart, orderplaced } = require('../controllers/userContollers');
+const { verifyLogin } = require('../middlewares/verify');
+const verify = require('../middlewares/verify');
 var router = express.Router();
 
 
@@ -9,30 +12,50 @@ var router = express.Router();
 
 router.get('/login', getLogin)
 
-router.post('/login',postLogin)
+router.post('/login', postLogin)
 
-router.get('/login-register',getLoginRegister)
+router.get('/login-register', getLoginRegister)
 
-router.get('/signup',getSignUp)
+router.get('/signup', getSignUp)
 
-router.post('/signup',postSignup)
+router.post('/signup', postSignup)
 
-router.get('/',homepage)
+router.get('/user-logout', logout)
 
-router.get('/productdetails/:id',getproductsDetails)
+router.get('/', homepage)
 
-router.get('/error',nodata)
+router.get('/productdetails/:id', getproductsDetails)
 
-router.get('/cart',getcart)
+router.get('/error', nodata)
 
-router.get('/checkout',getcheckout)
+router.get('/cart', verifyLogin, getcart)
 
-router.get('/otp',getOtp)
+router.get('/addtocart/:id',addtocart)
 
-router.post('/otp',postOtp)
+router.post('/delete-cart-items',deleteCart)
 
-router.get('/confirmotp',confirmOtp)
 
-router.post('/confirmotp',postconfirmOtp)
+router.get('/checkout',verifyLogin, getcheckout)
+
+router.post('/checkout',postcheckout)
+
+
+
+router.get('/otp', getOtp)
+
+router.post('/otp', postOtp)
+
+router.get('/confirmotp', confirmOtp)
+
+router.post('/confirmotp', postconfirmOtp)
+
+router.get('/profile', getProfile)
+
+router.post('/change-product-quantity',changeproductquantity)
+
+router.get('/veg',vegetables)
+
+
+router.get('/ordersuccess',orderplaced)
 
 module.exports = router;

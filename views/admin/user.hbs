@@ -26,11 +26,19 @@
     <link href="/admin/css/menu.css" rel="stylesheet" type="text/css">
     <link href="/admin/css/style.css" rel="stylesheet">
 </head>
+<style>
+         body {
+            color: #333539;
+            background: #303335;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+</style>
 
 <body class="sticky-header">
     <section>
         <!-- sidebar left start-->
-     <div class="sidebar-left bg-dark">
+     <div class="sidebar-left ">
             <div class="sidebar-left-info">
 
                 <div class="user-box">
@@ -89,7 +97,7 @@
                             
                             </ul> 
                     </li>
-                    <li class="menu-lists"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Orders </span></a>
+                    <li class="menu-lists"><a href="/admin-orders"><i class="mdi mdi-table"></i> <span>Orders </span></a>
                         <!-- <ul class="child-list">
                                 <li><a href="tables-basic.html"> Basic Table</a></li>
                                 <li><a href="tables-datatable.html"> Data Table</a></li>
@@ -179,42 +187,42 @@
                                             <thead>
 
                                                 <tr>
-                                                    <th>S-No:</th>
-                                                    <th>Username</th>
-                                                    <th>Email</th>
-                                                    <th>Contact-No</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th style="text-align:center ;">S-No:</th>
+                                                    <th style="text-align:center ;">Username</th>
+                                                    <th style="text-align:center ;">Email</th>
+                                                    <th style="text-align:center ;">Contact-No</th>
+                                                    <th style="text-align:center ;">Status</th>
+                                                    <th style="text-align:center ;">Action</th>
                                                 </tr>
                                             </thead>
                                             {{#each data}}
 
                                             <tbody>
                                                 <tr>
-                                                    <td>{{  @index  }}</td>
-                                                    <td>{{this.name}}</td>
-                                                    <td>{{this.email}}</td>
-                                                    <td>{{this.phone}}</td>
-                                                    <td>{{this.state}}</td>
+                                                    <td style="text-align:center ;">{{ inc @index }}</td>
+                                                    <td style="text-align:center ;">{{this.name}}</td>
+                                                    <td style="text-align:center ;">{{this.email}}</td>
+                                                    <td style="text-align:center ;">{{this.phone}}</td>
+                                                    <td style="text-align:center ;">{{this.state}}</td>
                                                     <td>
-{{!-- {{#if (eq this.state "active")}} --}}
+{{#if this.state}}
 
                                                         <div class="btn-group">
                                                             <a href="/admin-users/{{this._id}}"
-                                                                class="btn btn-danger btn-block mt-0 tooltips text-white  "
+                                                                class="btn btn-outline-danger btn-rounded text-center waves-effect waves-light mt-0 tooltips   "
                                                                 data-placement="top" data-toggle="tooltip"
                                                                 data-original-title="BLOCK">
-                                                                <p class="block">BLOCK</p>
+                                                                <p class="block"><center>Block</center></p>
                                                             </a>
-                                                            {{!-- {{else  }} --}}
+                                                            {{else  }}
                                                             <a href="/admin-user/{{this._id}}"
-                                                                class="btn btn-info btn-block mt-0 tooltips text-white "
+                                                                class="btn btn-outline-info btn-rounded waves-effect waves-light mt-0 tooltips "
                                                                 data-placement="top" data-toggle="tooltip"
                                                                 data-original-title="UNBLOCK">
-                                                                <p class="unblock">UNBLOCK</p>
+                                                                <p class="unblock"><center>Unblock</center></p>
                                                             </a>
                                                         </div>
-                                                        {{!-- {{/if}} --}}
+                                                        {{/if}}
 
 
                                                     </td>
@@ -547,6 +555,10 @@
     </section>
 
     <!-- jQuery -->
+{{!-- 
+    <script>
+    $(".create_index").text(parseInt($(".create_index").text())+1)
+</script> --}}
     <script src="/admin/js/jquery-3.2.1.min.js"></script>
     <script src="/admin/js/popper.min.js"></script>
     <script src="/admin/js/bootstrap.min.js"></script>
@@ -562,6 +574,9 @@
     <script src="/admin/plugins/datatables/responsive.bootstrap4.min.js"></script>
 
     <!--app js-->
+
+
+
     <script src="/admin/js/jquery.app.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
