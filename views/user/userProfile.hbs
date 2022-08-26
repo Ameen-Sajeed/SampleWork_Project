@@ -42,8 +42,6 @@
     <link rel="stylesheet" href="/user/css/plugins/easyzoom.css" />
     <link rel="stylesheet" href="/user/css/plugins/slinky.css" />
     <link rel="stylesheet" href="/user/css/style.css" />
-        <link rel="stylesheet" href="/stylesheets/style4.css" />
-
 </head>
 
 
@@ -53,123 +51,99 @@
     <div class="main-wrapper main-wrapper-2">
         <header class="header-area header-responsive-padding header-height-1">
             <div class="header-top d-none d-lg-block bg-gray">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 col-6">
-                            <div class="welcome-text">
-                                <p>Default Welcome Msg! </p>
-                            </div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-6">
+                        <div class="welcome-text">
+                            {{#if user}}
+                            <p>Welcome {{user.name}}</p>
+                            {{else}}
+                            <p> Welcome Please Login! </p>
+                            {{/if}}
                         </div>
-                        <div class="col-lg-6 col-6">
-                            <div class="language-currency-wrap">
-                                <div class="currency-wrap border-style">
-                                    <a class="currency-active" href="#">$ Dollar (US) <i class=" ti-angle-down "></i></a>
-                                    <div class="currency-dropdown">
-                                        <ul>
-                                            <li><a href="#">Taka (BDT) </a></li>
-                                            <li><a href="#">Riyal (SAR) </a></li>
-                                            <li><a href="#">Rupee (INR) </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="language-wrap">
-                                    <a class="language-active" href="#"><img src="assets/images/icon-img/flag.png" alt=""> English <i class=" ti-angle-down "></i></a>
-                                    <div class="language-dropdown">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/icon-img/flag.png" alt="">English </a></li>
-                                            <li><a href="#"><img src="assets/images/icon-img/spanish.png" alt="">Spanish</a></li>
-                                            <li><a href="#"><img src="assets/images/icon-img/arabic.png" alt="">Arabic </a></li>
-                                        </ul>
-                                    </div>
+                    </div>
+                    <div class="col-lg-6 col-6">
+                        <div class="language-currency-wrap">
+                            <div class="currency-wrap border-style">
+                                <a class="currency-active" href="#">Account<i class=" ti-angle-down "></i></a>
+                                <div class="currency-dropdown">
+                                    <ul>
+                                        <li><a href="/profile"> Profile</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                        <li><a href="/user-logout">Log Out </a></li>
+                                    </ul>
                                 </div>
                             </div>
+                            {{!-- <div class="language-wrap">
+                                <a class="language-active" href="#"><img src="assets/images/icon-img/flag.png" alt="">
+                                    English <i class=" ti-angle-down "></i></a>
+                                <div class="language-dropdown">
+                                    <ul>
+                                        <li><a href="#"><img src="assets/images/icon-img/flag.png" alt="">English </a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/images/icon-img/spanish.png" alt="">Spanish</a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/images/icon-img/arabic.png" alt="">Arabic </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="header-bottom sticky-bar">
+        </div>
+           <header class="header-area header-responsive-padding header-height-1">
+            <div class="header-top d-none d-lg-block bg-gray-5">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom sticky-bar bg-light ">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-6 col-6">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/images/logo/logo.png" alt="logo"></a>
+                                <a href="/login-register"><img src="/User/images/logo/looo-removebg-preview.png"  alt="logo"
+                                        height="170"></a>
                             </div>
                         </div>
-                        <div class="col-lg-6 d-none d-lg-block d-flex justify-content-center">
-                            <div class="main-menu text-center">
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="main-menu text-center ">
                                 <nav>
                                     <ul>
-                                        <li><a href="index.html">HOME</a>
-                                            <ul class="sub-menu-style">
-                                                <li><a href="index.html">Home version 1 </a></li>
-                                                <li><a href="index-2.html">Home version 2</a></li>
-                                                <li><a href="index-3.html">Home version 3</a></li>
-                                                <li><a href="index-4.html">Home version 4</a></li>
-                                                <li><a href="index-5.html">Home version 5</a></li>
-                                                <li><a href="index-6.html">Home version 6</a></li>
-                                                <li><a href="index-7.html">Home version 7</a></li>
-                                                <li><a href="index-8.html">Home version 8</a></li>
-                                            </ul>
+                                        <li><a href="/">HOME</a>
+
                                         </li>
-                                        <li><a href="shop.html">SHOP</a>
-                                            <ul class="mega-menu-style mega-menu-mrg-1">
-                                                <li>
-                                                    <ul>
-                                                        <li>
-                                                            <a class="dropdown-title" href="#">Shop Layout</a>
-                                                            <ul>
-                                                                <li><a href="shop.html">standard style</a></li>
-                                                                <li><a href="shop-sidebar.html">shop grid sidebar</a></li>
-                                                                <li><a href="shop-list.html">shop list style</a></li>
-                                                                <li><a href="shop-list-sidebar.html">shop list sidebar</a></li>
-                                                                <li><a href="shop-right-sidebar.html">shop right sidebar</a></li>
-                                                                <li><a href="shop-location.html">store location</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-title" href="#">Products Layout</a>
-                                                            <ul>
-                                                                <li><a href="product-details.html">tab style 1</a></li>
-                                                                <li><a href="product-details-2.html">tab style 2</a></li>
-                                                                <li><a href="product-details-gallery.html">gallery style </a></li>
-                                                                <li><a href="product-details-affiliate.html">affiliate style</a></li>
-                                                                <li><a href="product-details-group.html">group style</a></li>
-                                                                <li><a href="product-details-fixed-img.html">fixed image style </a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop.html"><img src="assets/images/banner/menu.png" alt=""></a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">PAGES</a>
+
+
+
+                                        <li><a href=""> SHOP BY &nbsp; CATEGORY</a>
+
                                             <ul class="sub-menu-style">
-                                                <li><a href="about-us.html">about us </a></li>
-                                                <li><a href="cart.html">cart page</a></li>
-                                                <li><a href="checkout.html">checkout </a></li>
-                                                <li><a href="my-account.html">my account</a></li>
-                                                <li><a href="wishlist.html">wishlist </a></li>
-                                                <li><a href="compare.html">compare </a></li>
+                                                {{#each category}}
+                                                <li><a href="about-us.html"> {{this.name}}</a></li>
+                                                <li><a href="cart.html"></a></li>
+                                                <li><a href="checkout.html"> </a></li>
+                                                <li><a href="my-account.html"></a></li>
+                                                <li><a href="wishlist.html"></a></li>
+                                                {{!-- <li><a href="compare.html"></a></li>
                                                 <li><a href="contact-us.html">contact us </a></li>
-                                                <li><a href="login-register.html">login / register </a></li>
+                                                <li><a href="login-register.html">login / register </a></li> --}}
+                                                {{/each}}
                                             </ul>
+
                                         </li>
-                                        <li><a href="blog.html">BLOG</a>
-                                            <ul class="sub-menu-style">
-                                                <li><a href="blog.html">blog standard </a></li>
-                                                <li><a href="blog-sidebar.html">blog sidebar</a></li>
-                                                <li><a href="blog-details.html">blog details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about-us.html">ABOUT</a></li>
-                                        <li><a href="contact-us.html">CONTACT US</a></li>
+
+
+                                        <li><a href="about-us.html">OFFERS</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-6">
+                        <div class="col-lg-3 col-md-6 col-6 ">
                             <div class="header-action-wrap">
                                 <div class="header-action-style header-search-1">
                                     <a class="search-toggle" href="#">
@@ -179,24 +153,34 @@
                                     <div class="search-wrap-1">
                                         <form action="#">
                                             <input placeholder="Search products…" type="text">
-                                            <button class="button-search"><i class="pe-7s-search"></i></button>
+                                            <button class="button-search"> <i class="pe-7s-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="header-action-style">
-                                    <a title="Login Register" href="login-register.html"><i class="pe-7s-user"></i></a>
+                                <div class="header-action-style d-flex gap-3 dropdown">
+
+
+                                    <a title="Login Register" href="/login-register"><i class="pe-7s-user"></i></a>
                                 </div>
+
+
+
+
+
+
                                 <div class="header-action-style">
                                     <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
                                 </div>
                                 <div class="header-action-style header-action-cart">
                                     <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
-                                        <span class="product-count bg-black">01</span>
+                                        <span class="product-count bg-black" id="cart-count">{{cartcount}}</span>
                                     </a>
                                 </div>
                                 <div class="header-action-style d-block d-lg-none">
                                     <a class="mobile-menu-active-button" href="#"><i class="pe-7s-menu"></i></a>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -250,11 +234,11 @@
         <div class="breadcrumb-area bg-gray-4 breadcrumb-padding-1">
             <div class="container">
                 <div class="breadcrumb-content text-center">
-                    <h2>My Profile </h2>
+                    <h2>My Account </h2>
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><i class="ti-angle-right"></i></li>
-                        <li>My Profile </li>
+                        <li>My Account </li>
                     </ul>
                 </div>
             </div>
@@ -276,8 +260,8 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-4">
                                     <div class="myaccount-tab-menu nav" role="tablist">
-                                        <a href="#dashboad" class="active" data-bs-toggle="tab">My details</a>
-                                        <a href="#orders" data-bs-toggle="tab">Orders</a>
+                                        <a href="#dashboad"  data-bs-toggle="tab">Dashboard</a>
+                                        <a href="#orders" class="active" data-bs-toggle="tab">Orders</a>
                                         <a href="#download" data-bs-toggle="tab">Download</a>
                                         <a href="#payment-method" data-bs-toggle="tab">Payment Method</a>
                                         <a href="#address-edit" data-bs-toggle="tab">Address</a>
@@ -290,128 +274,49 @@
                                 <div class="col-lg-9 col-md-8">
                                     <div class="tab-content" id="myaccountContent">
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+                                        <div class="tab-pane fade show " id="dashboad" role="tabpanel">
                                             <div class="myaccount-content">
-                                                <h3>My details</h3>
-                                                {{!-- <div class="welcome">
-                                                    <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
+                                                <h3>Dashboard</h3>
+                                                <div class="welcome">
+                                                    <p>Hello, <strong>Name: {{user.name}}</strong></strong><a href="login-register.html" class="logout"> Logout</a>)</p>
                                                 </div>
 
-                                                <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p> --}}
-<div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                                    class="rounded-circle" width="150">
-                                <div class="mt-3">
-                                    <h4></h4>
-                                    <p class="text-secondary mb-1">Full Stack Developer</p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                    {{!-- <button class="btn btn-primary">Follow</button>
-                                    <button class="btn btn-outline-primary">Message</button> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                                                <div class="container rounded bg-white mt-5 mb-5">
-   <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{!-- {{user.name}} --}}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{!-- {{user.email}} --}}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Phone</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{!-- {{user.number}} --}}
-                                </div>
-                            </div>
-                            <hr>
-                            {{!-- <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Mobile</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    (320) 380-4539
-                                </div>
-                            </div>
-                            <hr> --}}
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a class="btn btn-info " target="__blank"
-                                        href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-</div>
-</div>
-</div>
+                                                <p class="mb-0">Email: {{user.email}}</p>
+                                                <p>Contact No: {{user.phone}} </p>
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade" id="orders" role="tabpanel">
-                                            <div class="myaccount-content">
+                                        <div class="tab-pane fade show active" id="orders" role="tabpanel">
+                                            <div class="myaccount-content active">
                                                 <h3>Orders</h3>
                                                 <div class="myaccount-table table-responsive text-center">
                                                     <table class="table table-bordered">
                                                         <thead class="thead-light">
+                                                           
                                                             <tr>
                                                                 <th>Order</th>
+                                                                <th>Name</th>
                                                                 <th>Date</th>
                                                                 <th>Status</th>
                                                                 <th>Total</th>
+                                                                <th>Payment Method</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                             {{#each orders}}
                                                             <tr>
-                                                                <td>1</td>
-                                                                <td>Aug 22, 2018</td>
-                                                                <td>Pending</td>
-                                                                <td>$3000</td>
-                                                                <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
+                                                                <td>{{inc @index}}</td>
+                                                                <td>{{this.deliveryDetails.name}}</td>
+                                                                <td class="d-inline-block text-truncate" style="max-width: 150px;">{{this.date}}</td>
+                                                                <td>{{this.status}}</td>
+                                                                <td>{{this.totalAmount}}</td>
+                                                                <td>{{this.paymentMethod}}</td>
+                                                                <td><a href="/viewOrderProducts/{{this._id}}" class="check-btn sqr-btn ">View</a></td>
                                                             </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td>July 22, 2018</td>
-                                                                <td>Approved</td>
-                                                                <td>$200</td>
-                                                                <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>June 12, 2017</td>
-                                                                <td>On Hold</td>
-                                                                <td>$990</td>
-                                                                <td><a href="cart.html" class="check-btn sqr-btn ">View</a></td>
-                                                            </tr>
+                                                        {{/each}}
+                                            
                                                         </tbody>
                                                     </table>
                                                 </div>

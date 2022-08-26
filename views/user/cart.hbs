@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="/user/css/plugins/easyzoom.css" />
     <link rel="stylesheet" href="/user/css/plugins/slinky.css" />
     <link rel="stylesheet" href="/user/css/style.css" />
+     <link rel="stylesheet" href="/stylesheets/style5.css" />
 
 </head>
 
@@ -96,57 +97,57 @@
             </div>
         </div>
 
-        <header class="header-area header-responsive-padding header-height-1">
-            <div class="header-top d-none d-lg-block bg-gray">
+         <header class="header-area header-responsive-padding header-height-1">
+            <div class="header-top d-none d-lg-block bg-gray-5">
                 <div class="container">
+                    <div class="row align-items-center">
 
+                    </div>
                 </div>
             </div>
-            <div class="header-bottom sticky-bar">
+            <div class="header-bottom sticky-bar bg-light ">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-6 col-6">
                             <div class="logo">
-                                <a href="index.html"><img src="/User/images/logo/looo.jpeg" alt="logo"></a>
+                                <a href="/login-register"><img src="/User/images/logo/looo-removebg-preview.png"  alt="logo"
+                                        height="170"></a>
                             </div>
                         </div>
-                        <div class="col-lg-6 d-none d-lg-block d-flex justify-content-center">
-                            <div class="main-menu text-center">
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="main-menu text-center ">
                                 <nav>
                                     <ul>
-                                        <li><a href="/">HOME</a>
+                                        <li><a href="index.html">HOME</a>
 
                                         </li>
-                                        <li><a href="shop.html">CATEGORY</a>
-                                            <ul class="mega-menu-style mega-menu-mrg-1">
-                                                {{!-- {{#each category}} --}}
-                                                <li>
-                                                    <ul>
-                                                        <li>
-                                                            <a class="dropdown-title" href="#"></a>
-                                                            <ul>
-                                                                <li><a href="shop.html">Vegetables</a></li>
-                                                                <li><a href="shop-sidebar.html">Fruits</a></li>
-                                                                <li><a href="shop-list.html">Diary-Products</a></li>
-                                                                <li><a href="shop-list-sidebar.html">Poultry&Fish</a>
-                                                                </li>
-                                                                <li><a href="shop-right-sidebar.html">Organic
-                                                                        Products</a></li>
-                                                                <li><a href="shop-location.html"></a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+
+
+
+                                        <li><a href=""> SHOP BY &nbsp; CATEGORY</a>
+
+                                            <ul class="sub-menu-style">
+                                                {{#each category}}
+                                                <li><a href="about-us.html"> {{this.name}}</a></li>
+                                                <li><a href="cart.html"></a></li>
+                                                <li><a href="checkout.html"> </a></li>
+                                                <li><a href="my-account.html"></a></li>
+                                                <li><a href="wishlist.html"></a></li>
+                                                {{!-- <li><a href="compare.html"></a></li>
+                                                <li><a href="contact-us.html">contact us </a></li>
+                                                <li><a href="login-register.html">login / register </a></li> --}}
+                                                {{/each}}
                                             </ul>
-                                            {{!-- {{/each}} --}}
-                                            {{!--
-                                        <li><a href="about-us.html">ABOUT</a></li>
-                                        <li><a href="contact-us.html">CONTACT US</a></li> --}}
+
+                                        </li>
+
+
+                                        <li><a href="about-us.html">OFFERS</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-6">
+                        <div class="col-lg-3 col-md-6 col-6 ">
                             <div class="header-action-wrap">
                                 <div class="header-action-style header-search-1">
                                     <a class="search-toggle" href="#">
@@ -156,30 +157,34 @@
                                     <div class="search-wrap-1">
                                         <form action="#">
                                             <input placeholder="Search products…" type="text">
-                                            <button class="button-search"><i class="pe-7s-search"></i></button>
+                                            <button class="button-search"> <i class="pe-7s-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="header-action-style">
-                                    <a title="Login Register" href="/login-register.html"><i class="pe-7s-user"></i></a>
-                                    {{!-- {{# if user}}
-                                    {{user.name}}
-                                    {{else}}
-                                    Account
-                                    {{/if}} --}}
+                                <div class="header-action-style d-flex gap-3 dropdown">
 
+
+                                    <a title="Login Register" href="/login-register"><i class="pe-7s-user"></i></a>
                                 </div>
+
+
+
+
+
+
                                 <div class="header-action-style">
                                     <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
                                 </div>
                                 <div class="header-action-style header-action-cart">
                                     <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
-                                        <span class="product-count "></span>
+                                        <span class="product-count bg-black" id="cart-count">{{cartcount}}</span>
                                     </a>
                                 </div>
                                 <div class="header-action-style d-block d-lg-none">
                                     <a class="mobile-menu-active-button" href="#"><i class="pe-7s-menu"></i></a>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

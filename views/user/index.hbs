@@ -77,7 +77,7 @@
                                 <a class="currency-active" href="#">Account<i class=" ti-angle-down "></i></a>
                                 <div class="currency-dropdown">
                                     <ul>
-                                        <li><a href="#"> Profile</a></li>
+                                        <li><a href="/profile"> Profile</a></li>
                                         <li><a href="#">Settings</a></li>
                                         <li><a href="/user-logout">Log Out </a></li>
                                     </ul>
@@ -208,14 +208,14 @@
                                 <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
                             </div>
                             <div class="cart-title">
-                                <h4><a href="#">Stylish Swing Chair</a></h4>
-                                <span> 1 × $49.00 </span>
+                                <h4><a href="#">Products</a></h4>
+                                <span>  </span>
                             </div>
                             <div class="cart-delete">
                                 <a href="#">×</a>
                             </div>
                         </li>
-                        <li>
+                        {{!-- <li>
                             <div class="cart-img">
                                 <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
                             </div>
@@ -226,16 +226,16 @@
                             <div class="cart-delete">
                                 <a href="#">×</a>
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
-                    <div class="cart-total">
+                    {{!-- <div class="cart-total">
                         <h4>Subtotal: <span>$170.00</span></h4>
-                    </div>
+                    </div> --}}
                     <div class="cart-btn btn-hover">
                         <a class="theme-color" href="/cart">view cart</a>
                     </div>
                     <div class="checkout-btn btn-hover">
-                        <a class="theme-color" href="checkout.html">checkout</a>
+                        <a class="theme-color" href="/checkout">checkout</a>
                     </div>
                 </div>
             </div>
@@ -251,19 +251,19 @@
                             --}}
                             style="background-image:url(/Admin/images/{{this.image.[0]}})">
 
-                            <div class="container">
+                            <div class="container ">
                                 <div class="row">
-                                    <div class="col-12 hm2-slider-animation">
+                                    <div class="col-12 hm2-slider-animation ">
                                         <div
                                             class="slider-content-2 slider-content-2-wrap slider-animated-2 bg-transparent">
-                                            <h4 class="animated text-white">{{this.description1}}</h3>
-                                                <h1 class="animated text-white">{{this.description2}}</h1>
-                                                <h1 class="animated text-white">{{this.description3}}</h2>
+                                            <h4 class="animated text-success "><center>{{this.description1}}</center></h3>
+                                                <h1 class="animated text-danger text-center">{{this.description2}}!</h1>
+                                                <h1 class="animated text-success text-center">{{this.description3}}</h2>
 
-                                                    <div class="slider-btn-2 btn-hover ">
+                                                    <div class="slider-btn-2 btn-hover text-center ">
                                                         <a href="product-details.html"
-                                                            class="btn hover-border-radius theme-color animated text-white ">
-                                                            Shop Now
+                                                            class="btn hover-border-radius theme-color animated text-danger "><center> Shop Now</center>
+                                                           
                                                         </a>
                                                     </div>
                                                     <!-- <img class="animated" src="assets/images/icon-img/chair.png" alt=""> -->
@@ -435,9 +435,9 @@
                         <h2>Hot Products</h2>
                     </div>
                     <div class="tab-style-1 nav">
-                        <a class="active" href="#pro-1" data-bs-toggle="tab">New Arrivals </a>
-                        <a href="#pro-2" data-bs-toggle="tab" class=""> Best Sellers </a>
-                        <a href="#pro-3" data-bs-toggle="tab" class=""> Sale Items </a>
+                        {{!-- <a class="" href="#pro-1" data-bs-toggle="tab">New Arrivals </a> --}}
+                        {{!-- <a href="#pro-2" data-bs-toggle="tab" class=""> Best Sellers </a>
+                        <a href="#pro-3" data-bs-toggle="tab" class=""> Sale Items </a> --}}
                     </div>
                 </div>
 
@@ -452,9 +452,9 @@
                                             <img src="/Admin/images/{{this.image.[1]}}" alt="">
 
                                         </a>
-                                        <div class="product-badge badge-top badge-right badge-pink">
+                                        {{!-- <div class="product-badge badge-top badge-right badge-pink">
                                             <span>-10%</span>
-                                        </div>
+                                        </div> --}}
                                         <div class="product-action-wrap">
                                             <button class="product-action-btn-1" title="Wishlist"><i
                                                     class="pe-7s-like"></i></button>
@@ -772,10 +772,10 @@
                                     <div class="product-wrap">
                                         <div class="product-img img-zoom mb-25">
                                             <a href="product-details.html">
-                                                {{!-- <img src="/Admin/images/{{this.image.[0]}}" alt=""> --}}
+                                                <img src="/User/images/category/fr3.jpg" alt="">
                                             </a>
                                             <div class="product-badge badge-top badge-right badge-pink">
-                                                <span>-10%</span>
+                                                {{!-- <span>-10%</span> --}}
                                             </div>
                                             <div class="product-action-wrap">
                                                 <button class="product-action-btn-1" title="Wishlist"><i
@@ -793,10 +793,10 @@
                                         </div>
 
                                         <div class="product-content">
-                                            <h3><a href="product-details.html">New Modern Sofa Set</a></h3>
+                                            <h3><a href="product-details.html">Combo Pack</a></h3>
                                             <div class="product-price">
-                                                <span class="old-price">$25.89 </span>
-                                                <span class="new-price">$20.25 </span>
+                                                {{!-- <span class="old-price">$25.89 </span> --}}
+                                                <span class="new-price">₹208.25 </span>
                                             </div>
                                         </div>
                                     </div>
@@ -805,7 +805,7 @@
                                     <div class="product-wrap">
                                         <div class="product-img img-zoom mb-25">
                                             <a href="product-details.html">
-                                                <img src="assets/images/product/product-2.png" alt="">
+                                                <img src="/User/images/category/fr4.jpg" alt="">
                                             </a>
                                             <div class="product-action-wrap">
                                                 <button class="product-action-btn-1" title="Wishlist"><i
@@ -822,9 +822,9 @@
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h3><a href="product-details.html">New Modern Sofa Set</a></h3>
+                                            <h3><a href="product-details.html">Blackberry</a></h3>
                                             <div class="product-price">
-                                                <span>$50.25 </span>
+                                                <span class="new-price">₹50.25 </span>
                                             </div>
                                         </div>
                                     </div>
@@ -833,10 +833,10 @@
                                     <div class="product-wrap">
                                         <div class="product-img img-zoom mb-25">
                                             <a href="product-details.html">
-                                                <img src="assets/images/product/product-3.png" alt="">
+                                                <img src="/User/images/category/fr5.jpg" alt="">
                                             </a>
                                             <div class="product-badge badge-top badge-right badge-pink">
-                                                <span>-10%</span>
+                                                {{!-- <span>-10%</span> --}}
                                             </div>
                                             <div class="product-action-wrap">
                                                 <button class="product-action-btn-1" title="Wishlist"><i
@@ -853,10 +853,10 @@
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h3><a href="product-details.html">Easy Modern Chair</a></h3>
+                                            <h3><a href="product-details.html">Stawberry italy</a></h3>
                                             <div class="product-price">
-                                                <span class="old-price">$45.00 </span>
-                                                <span class="new-price">$40.00 </span>
+                                                {{!-- <span class="old-price">$45.00 </span> --}}
+                                                <span class="new-price">₹40.00 </span>
                                             </div>
                                         </div>
                                     </div>
@@ -865,7 +865,7 @@
                                     <div class="product-wrap">
                                         <div class="product-img img-zoom mb-25">
                                             <a href="product-details.html">
-                                                <img src="assets/images/product/product-4.png" alt="">
+                                                <img src="/User/images/category/fresh-honeycombs.jpg" alt="">
                                             </a>
                                             <div class="product-action-wrap">
                                                 <button class="product-action-btn-1" title="Wishlist"><i
@@ -882,9 +882,9 @@
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h3><a href="product-details.html">Stylish Swing Chair</a></h3>
+                                            <h3><a href="product-details.html">Organic Honey</a></h3>
                                             <div class="product-price">
-                                                <span>$30.25 </span>
+                                                <span class="new-price">₹1250 </span>
                                             </div>
                                         </div>
                                     </div>

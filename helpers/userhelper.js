@@ -3,12 +3,23 @@ const collection = require('../config/collection')
 const bcrypt = require('bcrypt')
 const objectId = require('mongodb').ObjectId
 const otp = require('../config/otp')
-const { serviceID } = require('../config/otp')
-const { response } = require('../app')
-const { date } = require('@hapi/joi/lib/template')
-const { details } = require('@hapi/joi/lib/errors')
+// const { serviceID } = require('../config/otp')
+// const { response } = require('../app')
 const { ObjectId } = require('mongodb')
 const client = require('twilio')(otp.accountSID, otp.authToken)
+const Razorpay = require('Razorpay')
+const paypal = require('paypal-rest-sdk')
+
+var instance = new Razorpay({
+    key_id: process.env.KEY_ID,
+    key_secret: process.env.KEY_SECRET,
+});
+
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id': process.env.CLIENT_ID,
+    'client_secret': process.env.CLIENT_SECRET,
+});
 
 
 module.exports = {
@@ -450,7 +461,8 @@ module.exports = {
 
             db.get().collection(collection.ORDERCOLLECTION).insertOne(orderObj).then((response) => {
                 db.get().collection(collection.CARTCOLLECTION).deleteOne({ user: objectId(order.userId) })
-                resolve()
+                console.log(response);
+                resolve(response.insertedId)
             })
         })
 
@@ -501,7 +513,7 @@ module.exports = {
                 },
                 {
                     $project: {
-                       _id:0,
+                        _id: 0,
                         quantity: 1,
                         product: { $arrayElemAt: ['$product', 0] }
                     }
@@ -589,9 +601,9 @@ module.exports = {
 
             ]).toArray()
             console.log(subtotal);
-            if(subtotal.length != 0){
+            if (subtotal.length != 0) {
                 resolve(subtotal[0].total)
-            }else{
+            } else {
                 resolve()
             }
 
@@ -622,5 +634,200 @@ module.exports = {
 
 
 
+    },
+
+    /* -------------------------------------------------------------------------- */
+    /*                               RazorPay Config                              */
+    /* -------------------------------------------------------------------------- */
+
+    generateRazorpay: (orderId, total) => {
+        return new Promise((resolve, reject) => {
+
+            var options = {
+                amount: total * 100,  // amount in the smallest currency unit
+                currency: "INR",
+                receipt: "" + orderId
+            };
+            instance.orders.create(options, function (err, order) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+
+                    console.log("new order:", order);
+                    resolve(order)
+                }
+
+            });
+
+        })
+    },
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                               Genrate PayPal                               */
+    /* -------------------------------------------------------------------------- */
+
+    generatePayPal: (orderId, totalPrice) => {
+        console.log('paypal working');
+        return new Promise((resolve, reject) => {
+            const create_payment_json = {
+                "intent": "sale",
+                "payer": {
+                    "payment_method": "paypal"
+                },
+                "redirect_urls": {
+                    return_url: "http://localhost:3000/ordersuccess",
+                    cancel_url: "http://localhost:3000/cancel"
+                },
+                "transactions": [
+                    {
+                        "item_list": {
+                            "items": [
+                                {
+                                    "name": "Red Sox Hat",
+                                    "sku": "001",
+                                    "price": totalPrice,
+                                    "currency": "USD",
+                                    "quantity": 1
+                                }
+                            ]
+                        },
+                        "amount": {
+                            "currency": "USD",
+                            "total": totalPrice
+                        },
+                        "description": "Hat for the best team ever"
+                    }
+                ]
+            };
+
+            paypal.payment.create(create_payment_json, function (error, payment) {
+                if (error) {
+                    console.log("paypal int. err stp ...4", error);
+                    throw error;
+
+                } else {
+                    console.log(payment, "********a");
+                    resolve(payment);
+                }
+            });
+        });
+    },
+
+    /* -------------------------------------------------------------------------- */
+    /*                               Verfiy Payment                               */
+    /* -------------------------------------------------------------------------- */
+
+    verifyPayment: (details) => {
+        return new Promise((resolve, reject) => {
+            const crypto = require('crypto')
+            let hmac = crypto.createHmac('sha256', process.env.KEY_SECRET)
+
+            hmac.update(details['payment[razorpay_order_id]'] + '|' + details['payment[razorpay_payment_id]'])
+            hmac = hmac.digest('hex')
+            if (hmac == details['payment[razorpay_signature]']) {
+                resolve()
+            }
+            else {
+                reject()
+            }
+
+        })
+
+    },
+
+    /* -------------------------------------------------------------------------- */
+    /*                   Checking Payment Status after Verifying                  */
+    /* -------------------------------------------------------------------------- */
+
+    changePaymentStatus: (orderId) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.ORDERCOLLECTION)
+
+                .updateOne({ _id: objectId(orderId) },
+                    {
+                        $set: {
+                            status: 'placed'
+                        }
+                    }
+                ).then(() => {
+                    resolve()
+                })
+
+        }
+
+
+
+
+        )
+    },
+
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                             View Order Product:                            */
+    /* -------------------------------------------------------------------------- */
+
+    getOrderProduct: (orderId) => {
+
+
+        return new Promise(async (resolve, reject) => {
+            let orderItems = await db.get().collection(collection.ORDERCOLLECTION).aggregate([
+
+                {
+                    $match: { _id: objectId(orderId) }
+                },
+
+                {
+                    $unwind: '$products'
+                },
+
+                {
+                    $project: {
+                        item: '$products.item',
+                        quantity: '$products.quantity'
+                    }
+
+                },
+                {
+                    $lookup: {
+                        from: collection.PRODUCTCOLLECTION,
+                        localField: 'item',
+                        foreignField: '_id',
+                        as: 'product'
+
+                    }
+                },
+                {
+                    $project: {
+                        item: 1,
+                        quantity: 1,
+                        product: { $arrayElemAt: ['$product', 0] }
+                    }
+                },
+
+            ]).toArray()
+
+            // console.log(cartItems[0].products)
+
+            resolve(orderItems)
+        })
+
+    },
+
+    /* -------------------------------------------------------------------------- */
+    /*                              View User Orders                              */
+    /* -------------------------------------------------------------------------- */
+
+    viewOrders: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            let order = await db.get().collection(collection.ORDERCOLLECTION).find({ userId: objectId(userId) }).toArray()
+            resolve(order)
+            console.log(order)
+        })
     }
+
+
+
 }

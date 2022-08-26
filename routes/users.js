@@ -1,6 +1,6 @@
 var express = require('express');
 const { getlogout } = require('../controllers/adminContollers');
-const { getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart, getcheckout, getOtp, confirmOtp, postOtp, getSignUp, postconfirmOtp, addtocart, logout, getProfile, changeproductquantity, vegetables, postcheckout, deleteCart, orderplaced } = require('../controllers/userContollers');
+const { getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart, getcheckout, getOtp, confirmOtp, postOtp, getSignUp, postconfirmOtp, addtocart, logout, getProfile, changeproductquantity, vegetables, postcheckout, deleteCart, orderplaced, verifyPayment, orderProducts } = require('../controllers/userContollers');
 const { verifyLogin } = require('../middlewares/verify');
 const verify = require('../middlewares/verify');
 var router = express.Router();
@@ -57,5 +57,10 @@ router.get('/veg',vegetables)
 
 
 router.get('/ordersuccess',orderplaced)
+
+
+router.get('/viewOrderProducts/:id',orderProducts)
+
+router.post('/verify-payment',verifyPayment)
 
 module.exports = router;

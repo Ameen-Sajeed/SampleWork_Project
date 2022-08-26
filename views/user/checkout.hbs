@@ -51,57 +51,100 @@
 
 <body>
     <div class="main-wrapper main-wrapper-2">
-        <header class="header-area header-responsive-padding header-height-1">
-            <div class="header-top d-none d-lg-block bg-gray">
-                <div class="container">
-
+         <div class="header-top d-none d-lg-block bg-gray">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-6">
+                        <div class="welcome-text">
+                            {{#if user}}
+                            <p>Welcome {{user.name}}</p>
+                            {{else}}
+                            <p> Welcome Please Login! </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-6">
+                        <div class="language-currency-wrap">
+                            <div class="currency-wrap border-style">
+                                <a class="currency-active" href="#">Account<i class=" ti-angle-down "></i></a>
+                                <div class="currency-dropdown">
+                                    <ul>
+                                        <li><a href="/profile"> Profile</a></li>
+                                        <li><a href="#">Settings</a></li>
+                                        <li><a href="/user-logout">Log Out </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="language-wrap">
+                                <a class="language-active" href="#"><img src="assets/images/icon-img/flag.png" alt="">
+                                    English <i class=" ti-angle-down "></i></a>
+                                <div class="language-dropdown">
+                                    <ul>
+                                        <li><a href="#"><img src="assets/images/icon-img/flag.png" alt="">English </a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/images/icon-img/spanish.png" alt="">Spanish</a>
+                                        </li>
+                                        <li><a href="#"><img src="assets/images/icon-img/arabic.png" alt="">Arabic </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="header-bottom sticky-bar">
+        </div>
+      <header class="header-area header-responsive-padding header-height-1">
+            <div class="header-top d-none d-lg-block bg-gray-5">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom sticky-bar bg-light ">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-6 col-6">
                             <div class="logo">
-                                <a href="index.html"><img src="/User/images/logo/looo.jpeg" alt="logo"></a>
+                                <a href="/login-register"><img src="/User/images/logo/looo-removebg-preview.png"  alt="logo"
+                                        height="170"></a>
                             </div>
                         </div>
-                        <div class="col-lg-6 d-none d-lg-block d-flex justify-content-center">
-                            <div class="main-menu text-center">
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="main-menu text-center ">
                                 <nav>
                                     <ul>
-                                        <li><a href="/">HOME</a>
+                                        <li><a href="index.html">HOME</a>
 
                                         </li>
-                                        <li><a href="shop.html">CATEGORY</a>
-                                            <ul class="mega-menu-style mega-menu-mrg-1">
-                                                {{!-- {{#each category}} --}}
-                                                <li>
-                                                    <ul>
-                                                        <li>
-                                                            <a class="dropdown-title" href="#"></a>
-                                                            <ul>
-                                                                <li><a href="shop.html">Vegetables</a></li>
-                                                                <li><a href="shop-sidebar.html">Fruits</a></li>
-                                                                <li><a href="shop-list.html">Diary-Products</a></li>
-                                                                <li><a href="shop-list-sidebar.html">Poultry&Fish</a>
-                                                                </li>
-                                                                <li><a href="shop-right-sidebar.html">Organic
-                                                                        Products</a></li>
-                                                                <li><a href="shop-location.html"></a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+
+
+
+                                        <li><a href=""> SHOP BY &nbsp; CATEGORY</a>
+
+                                            <ul class="sub-menu-style">
+                                                {{#each category}}
+                                                <li><a href="about-us.html"> {{this.name}}</a></li>
+                                                <li><a href="cart.html"></a></li>
+                                                <li><a href="checkout.html"> </a></li>
+                                                <li><a href="my-account.html"></a></li>
+                                                <li><a href="wishlist.html"></a></li>
+                                                {{!-- <li><a href="compare.html"></a></li>
+                                                <li><a href="contact-us.html">contact us </a></li>
+                                                <li><a href="login-register.html">login / register </a></li> --}}
+                                                {{/each}}
                                             </ul>
-                                            {{!-- {{/each}} --}}
-                                            {{!--
-                                        <li><a href="about-us.html">ABOUT</a></li>
-                                        <li><a href="contact-us.html">CONTACT US</a></li> --}}
+
+                                        </li>
+
+
+                                        <li><a href="about-us.html">OFFERS</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-6">
+                        <div class="col-lg-3 col-md-6 col-6 ">
                             <div class="header-action-wrap">
                                 <div class="header-action-style header-search-1">
                                     <a class="search-toggle" href="#">
@@ -111,30 +154,34 @@
                                     <div class="search-wrap-1">
                                         <form action="#">
                                             <input placeholder="Search products…" type="text">
-                                            <button class="button-search"><i class="pe-7s-search"></i></button>
+                                            <button class="button-search"> <i class="pe-7s-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="header-action-style">
-                                    <a title="Login Register" href="/login-register.html"><i class="pe-7s-user"></i></a>
-                                    {{!-- {{# if user}}
-                                    {{user.name}}
-                                    {{else}}
-                                    Account
-                                    {{/if}} --}}
+                                <div class="header-action-style d-flex gap-3 dropdown">
 
+
+                                    <a title="Login Register" href="/login-register"><i class="pe-7s-user"></i></a>
                                 </div>
+
+
+
+
+
+
                                 <div class="header-action-style">
                                     <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
                                 </div>
                                 <div class="header-action-style header-action-cart">
                                     <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
-                                        <span class="product-count bg-black">01</span>
+                                        <span class="product-count bg-black" id="cart-count">{{cartcount}}</span>
                                     </a>
                                 </div>
                                 <div class="header-action-style d-block d-lg-none">
                                     <a class="mobile-menu-active-button" href="#"><i class="pe-7s-menu"></i></a>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -298,23 +345,23 @@
                             <li>Product <span>Total</span></li>
                         </ul>
                     </div>
-                    <div class="your-order-middle">
+                    {{!-- <div class="your-order-middle">
                         <ul>
                             <li>Product Name X 1 <span>$329 </span></li>
                             <li>Product Name X 1 <span>$329 </span></li>
                         </ul>
-                    </div>
-                    <div class="your-order-info order-subtotal">
+                    </div> --}}
+                    {{!-- <div class="your-order-info order-subtotal">
                         <ul>
                             <li>Subtotal <span>$329 </span></li>
                         </ul>
-                    </div>
-                    <div class="your-order-info order-shipping">
+                    </div> --}}
+                    {{!-- <div class="your-order-info order-shipping">
                         <ul>
                             <li>Shipping <p>Enter your full address </p>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <div class="your-order-info order-total">
                         <ul>
                             <li>Total <span id="">₹{{total}}</span></li>
@@ -332,8 +379,7 @@
                         </div>
                     </div>
                     <div class="pay-top sin-payment">
-                        <input id="payment-method-2" class="radio" type="radio" value=""
-                            name="payment-method">
+                        <input id="payment-method-2" class="radio" type="radio" value="" name="payment-method">
                         <label for="payment-method-2">Check payments</label>
                         <div class="payment-box payment_method_bacs">
                             <p>Make your payment directly into our bank account. Please use your Order ID as the payment
@@ -341,8 +387,7 @@
                         </div>
                     </div>
                     <div class="pay-top sin-payment">
-                        <input id="COD" class="radio" type="radio" value=""
-                            name="payment_method">
+                        <input id="COD" class="radio" type="radio" value="" name="payment_method">
                         <label for="payment-method-3">Cash on delivery </label>
                         <div class="payment-box payment_method_bacs">
                             <p>Make your payment directly into our bank account. Please use your Order ID as the payment
@@ -350,8 +395,7 @@
                         </div>
                     </div>
                     <div class="pay-top sin-payment sin-payment-3">
-                        <input id="Paypal" class="radio" type="radio" value=""
-                            name="payment-method">
+                        <input id="Paypal" class="radio" type="radio" value="" name="payment-method">
                         <label for="payment-method-4">PayPal <img alt="" src="assets/images/icon-img/payment.png"><a
                                 href="#">What is PayPal?</a></label>
                         <div class="payment-box payment_method_bacs">
@@ -362,17 +406,24 @@
                 </div> --}}
 
 
-             <!-- Default radio -->
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="payment-method" id="COD" value="COD"/>
-  <label class="form-check-label" for="flexRadioDefault1"> Cash on Delivery</label>
-</div>
+                <!-- Default radio -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment-method" id="COD" value="COD" />
+                    <label class="form-check-label" for="flexRadioDefault1"> Cash on Delivery</label>
+                </div>
 
-<!-- Default checked radio -->
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="payment-method" id="Gpay" value="Gpay" checked/>
-  <label class="form-check-label" for="flexRadioDefault2"> Google Pay </label>
-</div>   
+                <!-- Default checked radio -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment-method" id="RAZORPAY" value="RAZORPAY" checked />
+                    <label class="form-check-label" for="flexRadioDefault2"> RazorPay </label>
+                </div>
+
+                 <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment-method" id="PAYPAL" value="PAYPAL" checked />
+                    <label class="form-check-label" for="flexRadioDefault2"> PayPal </label>
+                </div>
+
+
             </div>
             {{!-- <div class="Place-order btn-hover">
                 <button type="submit " class="btn"> Place Order </button>
@@ -584,7 +635,10 @@
     <script src="/user/js/plugins/easyzoom.js"></script>
     <script src="/user/js/plugins/slinky.min.js"></script>
     <script src="/user/js/plugins/ajax-mail.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <!-- Main JS -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="/user/js/main.js"></script>
 </body>
 

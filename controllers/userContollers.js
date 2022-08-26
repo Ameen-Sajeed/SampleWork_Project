@@ -3,6 +3,8 @@ const { MongoClient } = require("mongodb")
 const adminhelper = require("../helpers/adminhelper")
 const userhelper = require("../helpers/userhelper")
 const { doSignup } = require("../helpers/userhelper")
+const paypal = require('paypal-rest-sdk')
+
 
 
 
@@ -134,8 +136,12 @@ const nodata = (req, res) => {
 /* -------------------------------------------------------------------------- */
 const getcart = async (req, res, next) => {
     let subtotal;
-
     let products = await userhelper.viewCartProducts(req.session.user._id)
+    let totalValue=0;
+    if(products.length>0){
+        totalValue = await userhelper.getTotalAmount(req.session.user._id)
+
+    }
     console.log("hjjhdsgjgf");
     console.log(products);
 
@@ -143,7 +149,6 @@ const getcart = async (req, res, next) => {
     for (var i = 0; i < products.length; i++) {
         products[i].subTotal = subtotal[i].suBtotal
     }
-    let totalValue = await userhelper.getTotalAmount(req.session.user._id)
 
     console.log(subtotal);
     console.log(user)
@@ -203,8 +208,26 @@ const postcheckout = async (req, res) => {
     let totalPrice = await userhelper.getTotalAmount(req.body.userId)
     console.log(products);
 
-    userhelper.placeOrder(req.body, products, totalPrice).then((response) => {
-        res.json({ status: true,message:"http://localhost:3000/ordersuccess" })
+    userhelper.placeOrder(req.body, products, totalPrice).then((orderId) => {
+
+        if(req.body['payment-method']==='COD'){
+            res.json({codSuccess:true})
+
+        } else if(req.body['payment-method']==='RAZORPAY') {
+            userhelper.generateRazorpay(orderId,totalPrice).then((response)=>{
+                response.razorPay = true;
+                res.json(response)
+            })
+        }
+
+        else if(req.body['payment-method'] ==='PAYPAL'){
+            console.log('vjhdbfjbfh');
+            userhelper.generatePayPal(orderId,totalPrice).then((response)=>{
+                response.payPal = true;
+                res.json(response)
+            })
+        }
+
 
     })
 
@@ -261,9 +284,28 @@ const postconfirmOtp = (req, res) => {
     })
 }
 
-const getProfile = (req, res) => {
-    res.render('user/userProfile')
-}
+/* -------------------------------------------------------------------------- */
+/*                         view   Orders in User Profile                      */
+/* -------------------------------------------------------------------------- */
+
+const getProfile = async(req, res) => {
+   let orders= await userhelper.viewOrders(req.session.user._id)
+        res.render('user/userProfile',{orders,user})
+
+    }
+
+
+
+ /* -------------------------------------------------------------------------- */
+ /*                       View Ordered Products For user                       */
+ /* -------------------------------------------------------------------------- */
+
+
+ const orderProducts=async(req,res)=>{
+    let products= await userhelper.getOrderProduct(req.params.id)
+    res.render('user/orderProducts',{products,user})
+ }
+
 
 /* -------------------------------------------------------------------------- */
 /*                           change product Quantity                          */
@@ -303,8 +345,22 @@ const orderplaced=(req,res)=>{
     res.render('user/orderplaced')
 }
 
+
+const verifyPayment=(req,res)=>{
+    console.log(req.body);
+    userhelper.verifyPayment(req.body).then(()=>{
+        userhelper.changePaymentStatus(req.body['order[receipt]']).then(()=>{
+            console.log('payment success');
+            res.json({status:true})
+        })
+
+    }).catch((err)=>{
+        res.json({status:false,errMsg:"Payment Failed"})
+    })
+}
+
 module.exports = {
     getLogin, getLoginRegister, postSignup, postLogin, getproductsDetails, homepage, nodata, getcart,
     getcheckout, getOtp, confirmOtp, postOtp, postconfirmOtp, getSignUp, addtocart, logout, getProfile,
-    changeproductquantity, vegetables, postcheckout, deleteCart,orderplaced
+    changeproductquantity, vegetables, postcheckout, deleteCart,orderplaced,verifyPayment,orderProducts
 }
